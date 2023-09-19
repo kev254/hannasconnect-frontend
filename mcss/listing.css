@@ -1,0 +1,140 @@
+
+
+:root {
+    --primary: #A75502;
+    --primaryHover: #7D4002;
+    --lightPrimary: #F2E6D9;
+    --secondary: #0254A7;
+    --secondaryHover: #013264;
+    --white: #ffffff;
+    --grey: #7D7D7D;
+    --outline: #0000002c;
+    --dark: #0B0705;
+    --bodyText: #3C3C3C;
+    --bodyBg: #FFFBF6;
+    --ff-inter: 'Inter', sans-serif;
+    --boxShadow: 0px 0.73px 2.74791px 0px rgba(0, 0, 0, 0.02), 0px -0.69497px 4.95px 0px rgba(0, 0, 0, 0.03), 0px -1.41767px 14.1767px 0px rgba(0, 0, 0, 0.02), 0px -2.92013px 29.20132px 0px rgba(0, 0, 0, 0.03), 0px -8px 80px 0px rgba(0, 0, 0, 0.04);
+}
+
+
+.fs-title {
+    font-size: 25px;
+    color:  var(--primary);
+    margin-bottom: 15px;
+    font-weight: normal;
+    text-align: left
+}
+
+.purple-text {
+    color:  var(--primary);
+    font-weight: normal
+}
+
+.steps {
+    font-size: 25px;
+    color: gray;
+    margin-bottom: 10px;
+    font-weight: normal;
+    text-align: right
+}
+
+.fieldlabels {
+    color: gray;
+    text-align: left
+}
+
+#progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: var(--grey);
+    text-align: center;
+    display: flex;
+    justify-content:space-around;
+    max-width: 700px;
+    width: 100%;
+}
+#progressbar li{
+    font-size: 14px;
+}
+
+#progressbar .active {
+    color:  var(--primary)
+}
+
+#progressbar li {
+    list-style-type: none;
+    font-size: 13px;
+    font-weight: 500;
+    /* width: 25%; */
+    /* float: left; */
+    flex-grow: 1;
+    color:var(--grey);
+    position: relative;
+    
+}
+
+#progressbar #loc:before {
+    /* font-family: FontAwesome; */
+    content: "1";
+    z-index:5;
+    position: relative;
+}
+
+#progressbar #pro:before {
+    /* font-family: FontAwesome; */
+    content: "2";
+    z-index:5;
+    position: relative;
+}
+
+#progressbar #submit:before {
+    /* font-family: FontAwesome; */
+    content: "3";
+    z-index:5;
+    position: relative;
+}
+
+
+
+#progressbar li:before {
+    width: 40px;
+    height: 40px;
+    line-height: 36px;
+    display: block;
+    font-size: 14px;
+    color: #ffffff;
+    background: var(--grey);
+    margin: 2px;
+    border-radius: 50%;
+    margin: 0 auto 10px auto;
+    padding: 2px;
+}
+
+#progressbar li:after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: #dddddd;
+    position: absolute;
+    left: 0;
+    top: 20px;
+    z-index: 0;
+}
+
+#progressbar li.active:before,
+#progressbar li.active:after {
+    background:  var(--primary)
+}
+
+.progress {
+    height: 20px
+}
+
+.progress-bar {
+    background-color:  var(--primary)
+}
+
+.fit-image {
+    width: 100%;
+    object-fit: cover
+}

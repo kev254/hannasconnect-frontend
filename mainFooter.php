@@ -17,17 +17,19 @@
                 </div>
                 <div class="col-md-4  mb-3 mb-md-0">
                     
-                        <div> <img src="img/new/call.svg" class="social-icon" alt=""> (123) 456-7890</div>
+                        <div> <img src="img/new/call.svg" class="social-icon" alt=""> +254 722 124568</div>
                         <div class="my-3">  <img src="img/new/message-icon.svg" class="social-icon" alt=""> info@hannasconnect.com</div>
                 
-                    <div class="d-flex mt-2 justify-content-between">
+                    <!-- <div class="d-flex mt-2 justify-content-between">
                         <span>Social media
 
                         <a href=""><img src="img/new/facebook.svg" class="social-icon mx-3" alt=""></a>
                         <a href=""><img src="img/new/twitter.svg" class="social-icon mx-3" alt=""></a>
                         <a href=""><img src="img/new/linkedin.svg" class="social-icon mx-3" alt=""></a>
                         </span>
-                    </div>
+                    </div> -->
+                    <div class="my-3"><a href="uploads/t-c.pdf" target="_blank"><img src="img/new/message-icon.svg" class="social-icon" alt=""> Terms and Conditions</a></div>
+
                 </div>
                 
             </div>

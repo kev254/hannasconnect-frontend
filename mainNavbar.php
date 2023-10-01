@@ -29,8 +29,8 @@
                     </div>
                     <div class="dropdown-content dropdown-left">
                         <a class="dropdown-item" href="add_listing.php">Add listing</a>
-                        <a class="dropdown-item" href="#">My Profile</a>
-                        <a class="dropdown-item" href="#">Notifications</a>
+                        <a class="dropdown-item" href="profile.php">My Profile</a>
+                        <a class="dropdown-item" href="mylistings.php">My Listings</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="logout.php">Logout</a>
                     </div>

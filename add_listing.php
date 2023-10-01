@@ -35,7 +35,7 @@ if (isset($_POST['send'])) {
     $target = "uploads/";
     $fileTarget = $target . $fileName;
     $tempFileName = $_FILES["logo"]["tmp_name"];
-   
+
     $key1 = $_POST['key1'];
     $key2 = $_POST['key2'];
     $key3 = $_POST['key3'];
@@ -44,6 +44,9 @@ if (isset($_POST['send'])) {
     $key6 = $_POST['key6'];
     $key7 = $_POST['key7'];
     $key8 = $_POST['key8'];
+    $key9 = $_POST['key9'];
+    $key10 = $_POST['key10'];
+
 
     $bkey1 = $_POST['bkey1'];
     $bkey2 = $_POST['bkey2'];
@@ -53,62 +56,79 @@ if (isset($_POST['send'])) {
     $bkey6 = $_POST['bkey6'];
     $bkey7 = $_POST['bkey7'];
     $bkey8 = $_POST['bkey8'];
+    $bkey9 = $_POST['bkey9'];
+    $bkey10 = $_POST['bkey10'];
 
-    if(!empty($key1)){
+    if (!empty($key1)) {
         array_push($keys, $key1);
     }
-    if(!empty($key2)){
+    if (!empty($key2)) {
         array_push($keys, $key2);
     }
-    if(!empty($key3)){
+    if (!empty($key3)) {
         array_push($keys, $key3);
     }
-    if(!empty($key4)){
+    if (!empty($key4)) {
         array_push($keys, $key4);
     }
-    if(!empty($key5)){
+    if (!empty($key5)) {
         array_push($keys, $key5);
     }
-    if(!empty($key6)){
+    if (!empty($key6)) {
         array_push($keys, $key6);
     }
-    if(!empty($key7)){
+    if (!empty($key7)) {
         array_push($keys, $key7);
     }
-    if(!empty($key8)){
+    if (!empty($key8)) {
         array_push($keys, $key8);
     }
 
+    if (!empty($key9)) {
+        array_push($keys, $key9);
+    }
+    if (!empty($key10)) {
+        array_push($keys, $key10);
+    }
+
     // business keywords
-    if(!empty($bkey1)){
+    if (!empty($bkey1)) {
         array_push($keys, $bkey1);
     }
-    if(!empty($bkey2)){
+    if (!empty($bkey2)) {
         array_push($keys, $bkey2);
     }
-    if(!empty($bkey3)){
+    if (!empty($bkey3)) {
         array_push($keys, $bkey3);
     }
-    if(!empty($bkey4)){
+    if (!empty($bkey4)) {
         array_push($keys, $bkey4);
     }
-    if(!empty($bkey5)){
+    if (!empty($bkey5)) {
         array_push($keys, $bkey5);
     }
-    if(!empty($bkey6)){
+    if (!empty($bkey6)) {
         array_push($keys, $bkey6);
     }
-    if(!empty($bkey7)){
+    if (!empty($bkey7)) {
         array_push($keys, $bkey7);
     }
-    if(!empty($bkey8)){
+    if (!empty($bkey8)) {
         array_push($keys, $bkey8);
     }
-   
+
+    if (!empty($bkey9)) {
+        array_push($keys, $bkey9);
+    }
+    if (!empty($bkey10)) {
+        array_push($keys, $bkey10);
+    }
+
+
 
     $jsonkeywords = json_encode($keys);
-  
- 
+
+
 
 
     $bbfk = $_POST['bbfk'];
@@ -240,7 +260,7 @@ $conn->close();
 
                                             </ul>
                                         </div>
-                                        <form class="user" method="POST" action="" enctype="multipart/form-data" >
+                                        <form class="user" method="POST" action="" enctype="multipart/form-data">
                                             <!-- location dets part 1 -->
                                             <div class="form-part-1" id="form-part-1">
 
@@ -270,7 +290,7 @@ $conn->close();
                                                                 (required)</small></label>
                                                         <input type="text"
                                                             class="form-control form-control-user input-btn" id="slogan"
-                                                            name="slogan" placeholder="Slogan (Profession)" required>
+                                                            name="slogan" placeholder="Slogan (Profession)">
                                                     </div>
 
 
@@ -281,8 +301,7 @@ $conn->close();
                                                     <div class="col-sm-4 mb-3 mb-sm-0">
                                                         <label for="county">County <small> (required)</small></label>
                                                         <select class="form-control form-control-user input-btn rounded"
-                                                            id="county" placeholder="Select County" name="county"
-                                                            required>
+                                                            id="county" placeholder="Select County" name="county">
                                                             <option value=""></option>
                                                             <!-- Populate options dynamically using JavaScript -->
                                                         </select>
@@ -291,7 +310,7 @@ $conn->close();
                                                         <label for="constituency">Constituency <small>
                                                                 (required)</small></label>
                                                         <select class="form-control form-control-user input-btn rounded"
-                                                            id="constituency" name="sub_county" required>
+                                                            id="constituency" name="sub_county">
                                                             <option value=""></option>
                                                             <!-- Populate options dynamically using JavaScript -->
                                                         </select>
@@ -311,6 +330,7 @@ $conn->close();
                                                 <!-- email dets -->
                                                 <div class="form-group row">
                                                     <div class="col-sm-4 mb-3 mb-sm-0">
+                                                        <label for="ward">Email </label>
                                                         <input type="email"
                                                             class="form-control form-control-user input-btn"
                                                             name="email" id="email" placeholder="Email"
@@ -319,6 +339,7 @@ $conn->close();
                                                     </div>
 
                                                     <div class="col-sm-4">
+                                                        <label for="ward">Phone number </label>
 
                                                         <input type="text"
                                                             class="form-control form-control-user input-btn"
@@ -327,15 +348,16 @@ $conn->close();
                                                             required>
                                                     </div>
                                                     <div class="col-sm-4">
+                                                        <label for="ward">Profile image (Logo) </label>
 
                                                         <input type="file"
                                                             class="form-control form-control-user input-btn" name="logo"
-                                                            placeholder="Logo (Profile image)" required>
+                                                            placeholder="Logo (Profile image)">
                                                     </div>
                                                 </div>
 
 
-                                               
+
 
                                                 <div class="row mt-4">
                                                     <div class="col-sm-12 d-flex justify-content-end">
@@ -351,40 +373,117 @@ $conn->close();
                                                 <!-- individual -->
 
                                                 <div class="form-group row" id="individualFields">
+
+                                                    <div class="col-md-12 col-sm-12 mb-3 mb-sm-0">
+                                                        <label for="best_known_for">We are best known for. <span
+                                                                id="ibkfcount" style="font-size: 11px;">150</span> words
+                                                            required</label>
+                                                        <textarea class="form-control form-control-user input-btn"
+                                                            name="ibfk" placeholder="Optional" minlength="150" rows="4"
+                                                            id="ibkf"></textarea>
+                                                    </div>
                                                     <div class="col-md-6 col-sm-12">
                                                         <label for="best_known_for">What is your profession</label>
                                                         <select class="form-control form-control-user input-btn rounded"
                                                             id="profession" name="profession"
                                                             placeholder="Select Profession">
-                                                            <option value="Nurse">Nurse</option>
-                                                            <option value="Doctor">Doctor</option>
-                                                            <option value="Software developer">Software developer
-                                                            </option>
-                                                            <option value="Teacher">Teacher</option>
-                                                            <option value="Engineer">Engineer</option>
-                                                            <option value="Designer">Designer</option>
-                                                            <option value="Chef">Chef</option>
-                                                            <option value="Artist">Artist</option>
-                                                            <option value="Lawyer">Lawyer</option>
                                                             <option value="Accountant">Accountant</option>
-                                                            <option value="Journalist">Journalist</option>
-                                                            <option value="Electrician">Electrician</option>
-                                                            <option value="Plumber">Plumber</option>
-                                                            <option value="Mechanic">Mechanic</option>
-                                                            <option value="Dentist">Dentist</option>
-                                                            <option value="Pharmacist">Pharmacist</option>
-                                                            <option value="Pilot">Pilot</option>
+                                                            <option value="Auditor">Auditor</option>
+                                                            <option value="Actor/Actress">Actor/Actress</option>
                                                             <option value="Architect">Architect</option>
-                                                            <option value="Musician">Musician</option>
+                                                            <option value="Author">Author</option>
+                                                            <option value="Advocate">Advocate</option>
+                                                            <option value="Baker">Baker</option>
+                                                            <option value="Beauty guru">Beauty guru</option>
+                                                            <option value="Bricklayer">Bricklayer</option>
+                                                            <option value="Bus driver">Bus driver</option>
+                                                            <option value="Business analyst">Business analyst</option>
+                                                            <option value="Butcher">Butcher</option>
+                                                            <option value="Caregiver">Caregiver</option>
+                                                            <option value="Carpenter">Carpenter</option>
+                                                            <option value="Cashier">Cashier</option>
+                                                            <option value="Chauffeur/Driver">Chauffeur/Driver</option>
+                                                            <option value="Chef/Cook">Chef/Cook</option>
+                                                            <option value="Child care worker">Child care worker</option>
+                                                            <option value="Cleaner/Mama fua">Cleaner/Mama fua</option>
+                                                            <option value="Dancer">Dancer</option>
+                                                            <option value="Data Analyst">Data Analyst</option>
+                                                            <option value="Disk Jockey (Deejay/DJ)">Disk Jockey
+                                                                (Deejay/DJ)</option>
+                                                            <option value="Dentist">Dentist</option>
+                                                            <option value="Designer">Designer</option>
+                                                            <option value="Director">Director</option>
+                                                            <option value="Doctor">Doctor</option>
+                                                            <option value="Dustman/Refuse collector">Dustman/Refuse
+                                                                collector</option>
+                                                            <option value="Electrician">Electrician</option>
+                                                            <option value="Engineer">Engineer</option>
+                                                            <option value="Event planner">Event planner</option>
+                                                            <option value="Fashion Designer">Fashion Designer</option>
+                                                            <option value="Fitness trainer">Fitness trainer</option>
+                                                            <option value="Fireman/Fire fighter">Fireman/Fire fighter
+                                                            </option>
+                                                            <option value="Fisherman">Fisherman</option>
+                                                            <option value="Florist">Florist</option>
+                                                            <option value="Gardener">Gardener</option>
+                                                            <option value="Hairdresser/Hairstylists">
+                                                                Hairdresser/Hairstylists</option>
+                                                            <option value="Interior Designer">Interior Designer</option>
+                                                            <option value="Journalist">Journalist</option>
+                                                            <option value="Lawyer">Lawyer</option>
+                                                            <option value="Lecturer">Lecturer</option>
+                                                            <option value="Librarian">Librarian</option>
+                                                            <option value="Lifeguard/Swimming tutor">Lifeguard/Swimming
+                                                                tutor</option>
+                                                            <option value="Make-up-artist">Make-up-artist</option>
+                                                            <option value="Marketer">Marketer</option>
+                                                            <option value="Marketing analyst">Marketing analyst</option>
+                                                            <option value="Mechanic">Mechanic</option>
+                                                            <option value="Master of ceremony (M.C)/Hype man">Master of
+                                                                ceremony (M.C)/Hype man</option>
+                                                            <option value="Model">Model</option>
+                                                            <option value="Midwife">Midwife</option>
+                                                            <option value="Nurse">Nurse</option>
+                                                            <option value="Optician">Optician</option>
+                                                            <option value="Painter">Painter</option>
+                                                            <option value="Pharmacist">Pharmacist</option>
                                                             <option value="Photographer">Photographer</option>
-                                                            <!-- Add more professions here -->
+                                                            <option value="Plumber">Plumber</option>
+                                                            <option value="Project manager">Project manager</option>
+                                                            <option value="Public Relations manager">Public Relations
+                                                                manager</option>
+                                                            <option value="Real estate agent">Real estate agent</option>
+                                                            <option value="Receptionist">Receptionist</option>
+                                                            <option value="Scientist">Scientist</option>
+                                                            <option value="Sailor">Sailor</option>
+                                                            <option value="Sales and marketer">Sales and marketer
+                                                            </option>
+                                                            <option value="Scientist">Scientist</option>
+                                                            <option value="Script writer">Script writer</option>
+                                                            <option value="Sculptor">Sculptor</option>
+                                                            <option value="Seamstress">Seamstress</option>
+                                                            <option value="Secretary">Secretary</option>
+                                                            <option value="Software Developer">Software Developer
+                                                            </option>
+                                                            <option value="Shop assistant">Shop assistant</option>
+                                                            <option value="Surveyor">Surveyor</option>
+                                                            <option value="Tailor">Tailor</option>
+                                                            <option value="Taxi driver">Taxi driver</option>
+                                                            <option value="Teacher/Tutor">Teacher/Tutor</option>
+                                                            <option value="Translator">Translator</option>
+                                                            <option value="Travel agent">Travel agent</option>
+                                                            <option value="Travel tour guide">Travel tour guide</option>
+                                                            <option value="Language translator">Language translator
+                                                            </option>
+                                                            <option value="Veterinary doctor (Vet)">Veterinary doctor
+                                                                (Vet)</option>
+                                                            <option value="Videographer">Videographer</option>
+                                                            <option value="Video editor">Video editor</option>
+                                                            <option value="Waiter/Waitress">Waiter/Waitress</option>
+                                                            <option value="Writer">Writer</option>
+                                                            <option value="Web Developer">Web Developer</option>
+                                                            <option value="Other">Other</option>
                                                         </select>
-                                                    </div>
-                                                    <div class="col-md-6 col-sm-12 mb-3 mb-sm-0">
-                                                        <label for="best_known_for">I'm best known for</label>
-                                                        <input type="text"
-                                                            class="form-control form-control-user input-btn" name="ibfk"
-                                                            placeholder="best known for">
                                                     </div>
                                                     <div class="col-md-6 col-sm-12">
                                                         <label for="">Do you have a physical
@@ -414,9 +513,7 @@ $conn->close();
                                                             name="i_social_links" placeholder="social">
                                                     </div>
 
-                                                    <h5 class="mt-4">
-                                                        Define your working hours
-                                                    </h5>
+
                                                     <div class="col-sm-12 mb-3 mb-sm-0">
                                                         <label for="working_hours">Working hours</label>
                                                         <div class="time-range">
@@ -453,7 +550,8 @@ $conn->close();
                                                     </div>
 
                                                     <div class="col-md-6 col-sm-12 mb-3 mb-sm-0">
-                                                        <label for="price_type">Your charges</label>
+                                                        <label for="price_type">Indicate the cheapest price of your
+                                                            product or service.</label>
                                                         <input type="number"
                                                             class="form-control form-control-user input-btn"
                                                             name="i_price" placeholder="Price">
@@ -467,60 +565,84 @@ $conn->close();
                                                             <option value="Y">Negotiable</option>
                                                         </select>
                                                     </div>
-                                                    
+
                                                     <div class="col-sm-3 mb-3 mb-sm-0">
+                                                        <label for="ward">What id your first keyword term? </label>
                                                         <input type="text"
                                                             class="form-control form-control-user input-btn" name="key1"
-                                                            id="key1" placeholder="Keyword one">
+                                                            id="key1" placeholder="">
                                                     </div>
 
                                                     <div class="col-sm-3">
+                                                        <label for="ward">What id your second keyword term?</label>
 
                                                         <input type="text"
                                                             class="form-control form-control-user input-btn" name="key2"
-                                                            placeholder="key2">
+                                                            placeholder="">
                                                     </div>
                                                     <div class="col-sm-3">
+                                                        <label for="ward">What id your third keyword term? </label>
 
                                                         <input type="text"
                                                             class="form-control form-control-user input-btn" name="key3"
-                                                            placeholder="Key3">
+                                                            placeholder="">
                                                     </div>
 
                                                     <div class="col-sm-3">
+                                                        <label for="ward">What id your fourth keyword term? </label>
 
                                                         <input type="text"
                                                             class="form-control form-control-user input-btn" name="key4"
-                                                            placeholder="Key4">
+                                                            placeholder="">
                                                     </div>
-                                               
-                                               
+
+
                                                     <div class="col-sm-3 mb-3 mb-sm-0">
+                                                        <label for="ward">What id your fifth keyword term? </label>
                                                         <input type="text"
                                                             class="form-control form-control-user input-btn" name="key5"
-                                                            id="key5" placeholder="Keyword one">
+                                                            id="key5" placeholder="">
                                                     </div>
 
                                                     <div class="col-sm-3">
+                                                        <label for="ward">What id your sixth keyword term? </label>
 
                                                         <input type="text"
                                                             class="form-control form-control-user input-btn" name="key6"
-                                                            placeholder="key6">
+                                                            placeholder="">
                                                     </div>
                                                     <div class="col-sm-3">
+                                                        <label for="ward">What id your seventh keyword term? </label>
+
 
                                                         <input type="text"
                                                             class="form-control form-control-user input-btn" name="key7"
-                                                            placeholder="Key7">
+                                                            placeholder="">
                                                     </div>
 
                                                     <div class="col-sm-3">
+                                                        <label for="ward">What id your eighth keyword term? </label>
 
                                                         <input type="text"
                                                             class="form-control form-control-user input-btn" name="key8"
-                                                            placeholder="Key8">
+                                                            placeholder="">
                                                     </div>
-                                               
+
+                                                    <div class="col-sm-3">
+                                                        <label for="ward">What id your nineth keyword term? </label>
+
+                                                        <input type="text"
+                                                            class="form-control form-control-user input-btn" name="key9"
+                                                            placeholder="">
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <label for="ward">What id your tenth keyword term? </label>
+
+                                                        <input type="text"
+                                                            class="form-control form-control-user input-btn"
+                                                            name="key10" placeholder="">
+                                                    </div>
+
                                                     <div class="row mt-4 w-100">
                                                         <div class="col-sm-12 d-flex justify-content-end">
                                                             <div class="brown-btn-pill  px-5 waves-effect waves-light me-3"
@@ -536,12 +658,15 @@ $conn->close();
 
                                                 <!-- Business -->
                                                 <div class="form-group row" id="businessFields">
-                                                    <div class="col-md-6 col-sm-12 mb-3 mb-sm-0">
-                                                        <label for="best_known_for">We are best known for</label>
-                                                        <input type="text"
-                                                            class="form-control form-control-user input-btn" name="bbfk"
-                                                            placeholder="Optional">
+                                                    <div class="col-md-12 col-sm-12 mb-3 mb-sm-0">
+                                                        <label for="best_known_for">We are best known for. <span
+                                                                id="bbkfcount" style="font-size: 11px;">150</span> words
+                                                            required</label>
+                                                        <textarea class="form-control form-control-user input-btn"
+                                                            name="bbfk" placeholder="Optional" minlength="150" rows="4"
+                                                            id="bbkf"></textarea>
                                                     </div>
+
                                                     <div class="col-md-6 col-sm-12 mb-3 mb-sm-0">
                                                         <label for="best_known_for">Location</label>
                                                         <input type="text"
@@ -559,6 +684,46 @@ $conn->close();
                                                         <input type="text"
                                                             class="form-control form-control-user input-btn"
                                                             name="b_social_media" placeholder="Optional">
+                                                    </div>
+                                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                                        <label for="biz-category">Business or Company category</label>
+                                                        <select class="form-control form-control-user input-btn rounded"
+                                                            name="biz-category">
+                                                            <option value="">Select business type</option>
+                                                            <option value="Accommodation and Hospitality">Accommodation
+                                                                and Hospitality</option>
+                                                            <option value="Advertising and Marketing Firms">Advertising
+                                                                and Marketing Firms/Agencies
+                                                            </option>
+                                                            <option value="">Aerospace</option>
+                                                            <option value="Agriculture">Agriculture</option>
+                                                            <option value="Arts">Arts, Culture, Entertainment and Design
+                                                            </option>
+                                                            <option value="Computer and Technology">Computer and
+                                                                Technology</option>
+                                                            <option value="Construction">Construction</option>
+                                                            <option value="Education and Training">Education and
+                                                                Training</option>
+                                                            <option value="Fashion">Fashion</option>
+                                                            <option value="Financial">Financial</option>
+                                                            <option value="Insurance">Insurance</option>
+                                                            <option value="Fitness and Sports">Fitness and Sports
+                                                            </option>
+                                                            <option value="Healthcare and Social Assistance">Healthcare
+                                                                and Social Assistance</option>
+                                                            <option value="Mining">Mining</option>
+                                                            <option value="Hairdressing and Beauty Services">
+                                                                Hairdressing and Beauty Services</option>
+                                                            <option value="Retail Trade">Retail Trade</option>
+                                                            <option value="Security">Security</option>
+                                                            <option value="Wholesale trade">Wholesale trade</option>
+                                                            <option value="Manufacturing">Manufacturing</option>
+                                                            <option value="Media and News">Media and News</option>
+                                                            <option value="Pharmaceutical">Pharmaceutical</option>
+                                                            <option value="Telecommunication">Telecommunication</option>
+                                                            <option value="Transportation">Transportation</option>
+                                                            <option value="Other">Other</option>
+                                                        </select>
                                                     </div>
 
                                                     <h5 class="mt-4">
@@ -623,45 +788,68 @@ $conn->close();
                                                     <textarea class="form-control form-control-user input-btn"
                                                         id="branches_countries" name="b_branches"
                                                         placeholder="Optional"></textarea>
-                                                        <div class="col-sm-3 mb-3 mb-sm-0">
+                                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                                        <label for="ward">What id your first keyword term? </label>
+
                                                         <input type="text"
-                                                            class="form-control form-control-user input-btn" name="bkey1"
-                                                            id="bkey1" placeholder="Keyword one">
+                                                            class="form-control form-control-user input-btn"
+                                                            name="bkey1" id="bkey1" placeholder="">
                                                     </div>
                                                     <div class="col-sm-3 mb-3 mb-sm-0">
+                                                        <label for="ward">What id your second keyword term? </label>
                                                         <input type="text"
-                                                            class="form-control form-control-user input-btn" name="bkey2"
-                                                            id="bkey2" placeholder="Keyword one">
+                                                            class="form-control form-control-user input-btn"
+                                                            name="bkey2" id="bkey2" placeholder="">
                                                     </div>
                                                     <div class="col-sm-3 mb-3 mb-sm-0">
+                                                        <label for="ward">What id your third keyword term? </label>
+
                                                         <input type="text"
-                                                            class="form-control form-control-user input-btn" name="bkey3"
-                                                            id="bkey3" placeholder="Keyword one">
+                                                            class="form-control form-control-user input-btn"
+                                                            name="bkey3" id="bkey3" placeholder="">
                                                     </div>
                                                     <div class="col-sm-3 mb-3 mb-sm-0">
+                                                        <label for="ward">What id your fourth keyword term? </label>
                                                         <input type="text"
                                                             class="form-control form-control-user input-btn" name="key4"
-                                                            id="bkey4" placeholder="Keyword one">
+                                                            id="bkey4" placeholder="">
                                                     </div>
                                                     <div class="col-sm-3 mb-3 mb-sm-0">
+                                                        <label for="ward">What id your fifth keyword term? </label>
                                                         <input type="text"
-                                                            class="form-control form-control-user input-btn" name="bkey5"
-                                                            id="bkey5" placeholder="Keyword one">
+                                                            class="form-control form-control-user input-btn"
+                                                            name="bkey5" id="bkey5" placeholder="">
                                                     </div>
                                                     <div class="col-sm-3 mb-3 mb-sm-0">
+                                                        <label for="ward">What id your sixth keyword term? </label>
                                                         <input type="text"
-                                                            class="form-control form-control-user input-btn" name="bkey6"
-                                                            id="bkey6" placeholder="Keyword one">
+                                                            class="form-control form-control-user input-btn"
+                                                            name="bkey6" id="bkey6" placeholder="">
                                                     </div>
                                                     <div class="col-sm-3 mb-3 mb-sm-0">
+                                                        <label for="ward">What id your seventh keyword term? </label>
                                                         <input type="text"
-                                                            class="form-control form-control-user input-btn" name="bkey7"
-                                                            id="bkey7" placeholder="Keyword one">
+                                                            class="form-control form-control-user input-btn"
+                                                            name="bkey7" id="bkey7" placeholder="">
                                                     </div>
                                                     <div class="col-sm-3 mb-3 mb-sm-0">
+                                                        <label for="ward">What id your eighth keyword term? </label>
                                                         <input type="text"
-                                                            class="form-control form-control-user input-btn" name="bkey8"
-                                                            id="bkey8" placeholder="Keyword one">
+                                                            class="form-control form-control-user input-btn"
+                                                            name="bkey8" id="bkey8" placeholder="">
+                                                    </div>
+
+                                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                                        <label for="ward">What id your ninetht keyword term? </label>
+                                                        <input type="text"
+                                                            class="form-control form-control-user input-btn"
+                                                            name="bkey9" id="bkey8" placeholder="">
+                                                    </div>
+                                                    <div class="col-sm-3 mb-3 mb-sm-0">
+                                                        <label for="ward">What id your tenth keyword term? </label>
+                                                        <input type="text"
+                                                            class="form-control form-control-user input-btn"
+                                                            name="bkey10" id="bkey8" placeholder="">
                                                     </div>
                                                     <div class="row mt-4 w-100">
                                                         <div class="col-sm-12 d-flex justify-content-end">
@@ -693,7 +881,8 @@ $conn->close();
                                                         </select>
                                                     </div>
                                                     <div class="col-sm-12 mb-3 mb-sm-0">
-                                                        <label for="social_media">Price</label>
+                                                        <label for="social_media">Indicate the cheapest price of your
+                                                            product or service.</label>
                                                         <input type="number"
                                                             class="form-control form-control-user input-btn"
                                                             name="e_price" placeholder="Optional" value="0">
@@ -723,11 +912,13 @@ $conn->close();
 
                                                 <!-- Hire me field  -->
                                                 <div class="form-group row" id="hireMeFields">
-                                                    <div class="col-md-6 col-sm-12 mb-3 mb-sm-0">
-                                                        <label for="best_known_for">I'm best known for</label>
-                                                        <input type="text"
-                                                            class="form-control form-control-user input-btn" name="hbfk"
-                                                            placeholder="Best known for...">
+                                                    <div class="col-md-12 col-sm-12 mb-3 mb-sm-0">
+                                                        <label for="best_known_for">We are best known for. <span
+                                                                id="hbkfcount" style="font-size: 11px;">150</span> words
+                                                            required</label>
+                                                        <textarea class="form-control form-control-user input-btn"
+                                                            name="hbfk" placeholder="Optional" minlength="150" rows="4"
+                                                            id="hbkf"></textarea>
                                                     </div>
                                                     <div class="col-md-6 col-sm-12">
                                                         <label for="best_known_for">I’m looking for</label>
@@ -743,33 +934,102 @@ $conn->close();
                                                         <label for="best_known_for">Profession</label>
                                                         <select class="form-control form-control-user input-btn rounded"
                                                             name="h_profession">
-                                                            <option value="nursing">Nursing</option>
-                                                            <option value="software_developer">Software Developer
+                                                            <option value="Accountant">Accountant</option>
+                                                            <option value="Auditor">Auditor</option>
+                                                            <option value="Actor/Actress">Actor/Actress</option>
+                                                            <option value="Architect">Architect</option>
+                                                            <option value="Author">Author</option>
+                                                            <option value="Advocate">Advocate</option>
+                                                            <option value="Baker">Baker</option>
+                                                            <option value="Beauty guru">Beauty guru</option>
+                                                            <option value="Bricklayer">Bricklayer</option>
+                                                            <option value="Bus driver">Bus driver</option>
+                                                            <option value="Business analyst">Business analyst</option>
+                                                            <option value="Butcher">Butcher</option>
+                                                            <option value="Caregiver">Caregiver</option>
+                                                            <option value="Carpenter">Carpenter</option>
+                                                            <option value="Cashier">Cashier</option>
+                                                            <option value="Chauffeur/Driver">Chauffeur/Driver</option>
+                                                            <option value="Chef/Cook">Chef/Cook</option>
+                                                            <option value="Child care worker">Child care worker</option>
+                                                            <option value="Cleaner/Mama fua">Cleaner/Mama fua</option>
+                                                            <option value="Dancer">Dancer</option>
+                                                            <option value="Data Analyst">Data Analyst</option>
+                                                            <option value="Disk Jockey (Deejay/DJ)">Disk Jockey
+                                                                (Deejay/DJ)</option>
+                                                            <option value="Dentist">Dentist</option>
+                                                            <option value="Designer">Designer</option>
+                                                            <option value="Director">Director</option>
+                                                            <option value="Doctor">Doctor</option>
+                                                            <option value="Dustman/Refuse collector">Dustman/Refuse
+                                                                collector</option>
+                                                            <option value="Electrician">Electrician</option>
+                                                            <option value="Engineer">Engineer</option>
+                                                            <option value="Event planner">Event planner</option>
+                                                            <option value="Fashion Designer">Fashion Designer</option>
+                                                            <option value="Fitness trainer">Fitness trainer</option>
+                                                            <option value="Fireman/Fire fighter">Fireman/Fire fighter
                                                             </option>
-                                                            <option value="accountant">Accountant</option>
-                                                            <option value="barista">Barista</option>
-                                                            <option value="teacher">Teacher</option>
-                                                            <option value="graphic_designer">Graphic Designer</option>
-                                                            <option value="mechanic">Mechanic</option>
-                                                            <option value="lawyer">Lawyer</option>
-                                                            <option value="chef">Chef</option>
-                                                            <option value="doctor">Doctor</option>
-                                                            <option value="electrician">Electrician</option>
-                                                            <option value="photographer">Photographer</option>
-                                                            <option value="writer">Writer</option>
-                                                            <option value="architect">Architect</option>
-                                                            <option value="hair_stylist">Hair Stylist</option>
-                                                            <option value="fitness_trainer">Fitness Trainer</option>
-                                                            <option value="musician">Musician</option>
-                                                            <option value="plumber">Plumber</option>
-                                                            <option value="sales_manager">Sales Manager</option>
-                                                            <option value="translator">Translator</option>
-                                                            <option value="veterinarian">Veterinarian</option>
-                                                            <option value="pilot">Pilot</option>
-                                                            <option value="fashion_designer">Fashion Designer</option>
-                                                            <option value="social_worker">Social Worker</option>
-                                                            <option value="dental_hygienist">Dental Hygienist</option>
-                                                            <!-- Add more profession options as needed -->
+                                                            <option value="Fisherman">Fisherman</option>
+                                                            <option value="Florist">Florist</option>
+                                                            <option value="Gardener">Gardener</option>
+                                                            <option value="Hairdresser/Hairstylists">
+                                                                Hairdresser/Hairstylists</option>
+                                                            <option value="Interior Designer">Interior Designer</option>
+                                                            <option value="Journalist">Journalist</option>
+                                                            <option value="Lawyer">Lawyer</option>
+                                                            <option value="Lecturer">Lecturer</option>
+                                                            <option value="Librarian">Librarian</option>
+                                                            <option value="Lifeguard/Swimming tutor">Lifeguard/Swimming
+                                                                tutor</option>
+                                                            <option value="Make-up-artist">Make-up-artist</option>
+                                                            <option value="Marketer">Marketer</option>
+                                                            <option value="Marketing analyst">Marketing analyst</option>
+                                                            <option value="Mechanic">Mechanic</option>
+                                                            <option value="Master of ceremony (M.C)/Hype man">Master of
+                                                                ceremony (M.C)/Hype man</option>
+                                                            <option value="Model">Model</option>
+                                                            <option value="Midwife">Midwife</option>
+                                                            <option value="Nurse">Nurse</option>
+                                                            <option value="Optician">Optician</option>
+                                                            <option value="Painter">Painter</option>
+                                                            <option value="Pharmacist">Pharmacist</option>
+                                                            <option value="Photographer">Photographer</option>
+                                                            <option value="Plumber">Plumber</option>
+                                                            <option value="Project manager">Project manager</option>
+                                                            <option value="Public Relations manager">Public Relations
+                                                                manager</option>
+                                                            <option value="Real estate agent">Real estate agent</option>
+                                                            <option value="Receptionist">Receptionist</option>
+                                                            <option value="Scientist">Scientist</option>
+                                                            <option value="Sailor">Sailor</option>
+                                                            <option value="Sales and marketer">Sales and marketer
+                                                            </option>
+                                                            <option value="Scientist">Scientist</option>
+                                                            <option value="Script writer">Script writer</option>
+                                                            <option value="Sculptor">Sculptor</option>
+                                                            <option value="Seamstress">Seamstress</option>
+                                                            <option value="Secretary">Secretary</option>
+                                                            <option value="Software Developer">Software Developer
+                                                            </option>
+                                                            <option value="Shop assistant">Shop assistant</option>
+                                                            <option value="Surveyor">Surveyor</option>
+                                                            <option value="Tailor">Tailor</option>
+                                                            <option value="Taxi driver">Taxi driver</option>
+                                                            <option value="Teacher/Tutor">Teacher/Tutor</option>
+                                                            <option value="Translator">Translator</option>
+                                                            <option value="Travel agent">Travel agent</option>
+                                                            <option value="Travel tour guide">Travel tour guide</option>
+                                                            <option value="Language translator">Language translator
+                                                            </option>
+                                                            <option value="Veterinary doctor (Vet)">Veterinary doctor
+                                                                (Vet)</option>
+                                                            <option value="Videographer">Videographer</option>
+                                                            <option value="Video editor">Video editor</option>
+                                                            <option value="Waiter/Waitress">Waiter/Waitress</option>
+                                                            <option value="Writer">Writer</option>
+                                                            <option value="Web Developer">Web Developer</option>
+                                                            <option value="Other">Other</option>
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6 col-sm-12 mb-3 mb-sm-0">
@@ -779,7 +1039,7 @@ $conn->close();
                                                             name="h_experience" placeholder="Optional">
                                                     </div>
 
-                                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                                    <div class="col-sm-6 mb-3 mb-sm-0">
                                                         <label for="best_known_for">Education facility and level
                                                             (optional)</label>
                                                         <input type="text"
@@ -787,7 +1047,7 @@ $conn->close();
                                                             name="h_facility_level" placeholder="Optional">
                                                     </div>
 
-                                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                                    <div class="col-sm-6 mb-3 mb-sm-0">
                                                         <label for="best_known_for">What can you do?</label>
                                                         <input type="text"
                                                             class="form-control form-control-user input-btn"
@@ -795,18 +1055,19 @@ $conn->close();
                                                     </div>
 
 
-                                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                                    <div class="col-sm-6 mb-3 mb-sm-0">
                                                         <label for="best_known_for">Preferred salary in (KES)</label>
                                                         <input type="number"
                                                             class="form-control form-control-user input-btn"
-                                                            name="h_salary_expectation" placeholder="Optional">
+                                                            name="h_salary_expectation" placeholder="Optional"
+                                                            value="0">
                                                     </div>
-                                                    
-                                                    <div class="col-md-6 col-sm-12 mb-3 mb-sm-0">
+
+                                                    <div class="col-md-12 col-sm-12 mb-3 mb-sm-0">
                                                         <label for="best_known_for">Upload resume (CV)</label>
                                                         <input type="file"
-                                                            class="form-control form-control-user input-btn" name="cv_file"
-                                                            placeholder="Your cv">
+                                                            class="form-control form-control-user input-btn"
+                                                            name="cv_file" placeholder="Your cv">
                                                     </div>
                                                     <div class="row mt-4 w-100">
                                                         <div class="col-sm-12 d-flex justify-content-end">
@@ -846,6 +1107,15 @@ $conn->close();
                                                     You can now submit your details. Thank you for choosing
                                                     Hannasconnect
                                                 </p>
+                                                <div class="form-group text-center">
+                                                    <input type="checkbox" class="form-check-input" id="terms"
+                                                        name="terms" required>
+                                                    <label for="terms">I agree to the <a href="uploads/t-c.pdf"
+                                                            target="_blank">Terms and Conditions</a></label>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                                                </div>
                                                 <div class="d-flex justify-content-end">
                                                     <div class="brown-btn-pill  px-5 waves-effect waves-light "
                                                         id="back-btn"> Back </div>
@@ -905,6 +1175,7 @@ $conn->close();
         var countyCheck = document.querySelector("#county");
         var constituencyCheck = document.querySelector("#sub_county");
         var wardCheck = document.querySelector("#ward");
+
 
 
 
@@ -1100,13 +1371,43 @@ $conn->close();
             });
         });
     </script>
-            <script>
-    function onSubmit(){
-        document.querySelector('#finish').value = "Please wait...";
-        document.querySelector('#finish').disabled = true;
-    }
-</script>
-        
+    <script>
+        function onSubmit() {
+            document.querySelector('#finish').value = "Please wait...";
+            document.querySelector('#finish').disabled = true;
+        }
+    </script>
+    <script>
+        const btextArea = document.getElementById('bbkf');
+        const bwordCountDisplay = document.getElementById('bbkfcount');
+        const htextArea = document.getElementById('hbkf');
+        const hwordCountDisplay = document.getElementById('hbkfcount');
+
+        const itextArea = document.getElementById('ibkf');
+        const iwordCountDisplay = document.getElementById('ibkfcount');
+
+        btextArea.addEventListener('input', function () {
+            const text = this.value;
+            const words = text.trim().split(/\s+/);
+            const wordCount = 150 - words.length;
+            bwordCountDisplay.textContent = wordCount;
+        });
+
+        htextArea.addEventListener('input', function () {
+            const text = this.value;
+            const words = text.trim().split(/\s+/);
+            const wordCount = 150 - words.length;
+            hwordCountDisplay.textContent = wordCount;
+        });
+
+        itextArea.addEventListener('input', function () {
+            const text = this.value;
+            const words = text.trim().split(/\s+/);
+            const wordCount = 150 - words.length;
+            iwordCountDisplay.textContent = wordCount;
+        });
+    </script>
+
 
 </body>
 

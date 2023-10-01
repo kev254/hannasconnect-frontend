@@ -7,19 +7,34 @@ $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 $sql2 = "SELECT reviews.*, users.* FROM reviews INNER JOIN users ON reviews.review_by = users.id WHERE reviews.review_to='$id';";
 $result2 = $conn->query($sql2);
+$currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$phoneNumber = $_SESSION['user']['phone'];
+
+// Replace this with the message you want to send (optional)
+$message = 'Hello, check out this link!';
+
+// Encode the message for URL
+$encodedMessage = urlencode($currentURL);
+
+// Generate the WhatsApp share link
+$whatsappShareLink = "whatsapp://send?phone={$phoneNumber}&text={$encodedMessage}";
+
+
+
+
 // $row2 = $result2->fetch_assoc();
 $image = "uploads/logo.png";
-if ($row['image_url'] !== null) {
+if ($row['image_url'] !== null && $row['image_url'] !== "") {
     $image = 'uploads/' . $row['image_url'];
 }
 
 if ($row['category_id'] === "1") {
-    $cat = "Individual service provider";
+    $cat = "Service provider";
 
 } elseif ($row['category_id'] === "2") {
     $cat = "Company";
 } elseif ($row['category_id'] === "3") {
-    $cat = "Emergency service provider";
+    $cat = "Emergency services";
 } else {
     $cat = "Hire me (CV center)";
 }
@@ -81,13 +96,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href="mcss/style.css" rel="stylesheet">
     <style>
         .action_btn {
-            background-color:#A75502 !important;
+            background-color: #A75502 !important;
             border-radius: 30px;
             width: 150px;
             font-size: 13px;
             font-family: 'DM Sans', sans-serif;
             height: 50px;
             border-color: white;
+        }
+
+        .action_btn2 {
+            background-color: white !important;
+            border-radius: 30px;
+            border-color: #A75502;
+            width: 150px;
+            font-size: 13px;
+            font-family: 'DM Sans', sans-serif;
+            height: 50px;
+            border-color: #A75502;
+        }
+
+        .action_btn2 a {
+            color: black !important;
         }
 
         .action_btn:hover {
@@ -113,6 +143,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             border-color: white;
         }
 
+        .location_btn_2 {
+            background-color: #E5E4E2 !important;
+            border-radius: 5px;
+            width: 100%;
+            font-size: 10px;
+            text-align: start;
+            font-family: 'DM Sans', sans-serif;
+            color: black !important;
+            height: auto;
+            border-color: white;
+        }
+
+
         .location_btn:hover {
             background-color: #E5E4E2 !important;
             width: auto;
@@ -129,10 +172,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             color: black !important;
 
         }
+
         .review-card {
-            margin-bottom: 20px; /* Add space between cards */
+            margin-bottom: 20px;
+            /* Add space between cards */
         }
-        
+
+        .profile-image {
+            height: 500px !important;
+            width: 500px !important;
+            border-radius: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .profile-image {
+                height: 150px !important;
+                width: 150px !important;
+                border-radius: 75px;
+            }
+
+        }
+
+        .sub-title {
+            font-weight: bold;
+            color: #A75502 !important;
+
+
+        }
     </style>
 
 </head>
@@ -151,15 +217,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php include 'mainNavbar.php'; ?>
 
 
-                <!-- About Start -->
-                <section id="about" class="container-xxl py-5">
+        <!-- About Start -->
+        <section id="about" class="container-xxl py-5 large_screen_view" >
             <div class="container">
-                <div class="row g-5 align-items-center">
+                <div class="row g-5 align-items-top">
                     <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                         <div class="row g-0 about-bg rounded overflow-hidden">
                             <div class="col-12 text-start">
-                                <img class="img-fluid w-100" src="<?php echo $image; ?>">
+                                <img class="img-fluid w-100 profile-image" src="<?php echo $image; ?>">
                             </div>
+                            
                         </div>
                     </div>
                     <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
@@ -185,8 +252,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="tab-pane fade show active" id="reviews" role="tabpanel"
                                 aria-labelledby="reviews-tab">
                                 <!-- Reviews content goes here -->
-                                <p class="mb-4">
+                                <br>
+                                <p class="mb-4"><i class="bi bi-building"></i>
                                     <?php echo $row["profession"]; ?>
+
                                 </p>
                                 <p class="mb-4">
                                     <button class="btn btn-secondary py-12 px-3 mt-1 me-3 location_btn"
@@ -199,9 +268,119 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     </button>
 
                                 </p>
-                                <p class="mb-4">
-                                    <?php echo $row["slogan"]; ?>
-                                </p>
+                                <?php
+                                if ($row['category_id'] === "4") {
+                                    echo '<p class="mb-4"> <span class="sub-title">Slogan: </span>
+                             ' . $row["slogan"] . '
+                            </p>';
+                                    echo '<p class="mb-4"> <span class="sub-title">Looking for: </span>
+                             ' . $row["looking_for"] . ' 
+                            </p>';
+                                    echo '<p class="mb-4"> <span class="sub-title"> Experience:</span> ' . $row['experience'] . '
+                               </p>';
+
+                                    echo ' <p class="mb-4">
+                                    <button class="btn btn-secondary py-12 px-3 mt-1 me-3 location_btn"
+                                        id="shareButton"> <i class="bi bi-eye"></i>
+                                        <a href="uploads/' . $row["cv_url"] . '" style="color: black;">View CV</a>
+
+                                    </button>
+
+                                </p>';
+
+                                }
+
+                                if ($row['category_id'] === "2") {
+                                    echo '<p class="mb-4"> <span class="sub-title">Slogan: </span>
+                             ' . $row["slogan"] . '
+                            </p>';
+                                    echo '<p class="mb-4"> <span class="sub-title">Message to customers: </span>
+                             ' . $row["message"] . '
+                            </p>';
+                                    echo '<p class="mb-4"> <span class="sub-title">Known for: </span>
+                             ' . $row["bkf"] . ' 
+                            </p>';
+
+                                    echo '<p class="mb-4"> <span class="sub-title">Website:</span> 
+                                ' . $row["website"] . ' 
+                               </p>';
+                                    echo '<br>';
+
+                                    echo '<h4> We deal with.</h4>';
+                                    $keyWords = json_decode($row['key_words'], true);
+                                    echo '<ol>'; // Assuming 'key_words' is a JSON array
+                                    echo '<li>' . implode('</li><li>', $keyWords) . '</li>';
+                                    $count++;
+                                    echo '</ol';
+
+
+
+                                }
+
+                                if ($row['category_id'] === "1") {
+                                    echo '<p class="mb-4"> <span class="sub-title">Slogan: </span>
+                             ' . $row["slogan"] . '
+                            </p>';
+                                    echo '<p class="mb-4"> <span class="sub-title">Open days:</span> 
+                             ' . $row["working_days"] . '
+                            </p>';
+                                    echo '<p class="mb-4"> <span class="sub-title">Opens at: </span>
+                             ' . $row["open_at"] . '
+                            </p>';
+                                    echo '<p class="mb-4"> <span class="sub-title">Closes at: </span>
+                             ' . $row["clsoing_at"] . '
+                            </p>';
+                                    echo '<p class="mb-4"> <span class="sub-title">Known for: </span>
+                             ' . $row["bkf"] . ' 
+                            </p>';
+
+                                    echo '<p class="mb-4"> <span class="sub-title">Website: </span>
+                                ' . $row["website"] . ' 
+                               </p>';
+                                    echo '<p class="mb-4"> <span class="sub-title">Charges: </span>
+                                ' . $row["price"] . '  KES
+                               </p>';
+
+                                    echo '<br>';
+
+                                    echo '<h4> I deal with.</h4>';
+                                    $keyWords = json_decode($row['key_words'], true);
+                                    echo '<ol>'; // Assuming 'key_words' is a JSON array
+                                    echo '<li>' . implode('</li><li>', $keyWords) . '</li>';
+                                    $count++;
+                                    echo '</ol';
+
+
+
+
+
+
+                                }
+
+
+                                if ($row['category_id'] === "3") {
+                                    echo '<p class="mb-4"> <span class="sub-title">Slogan: </span>
+                             ' . $row["slogan"] . '
+                            </p>';
+                                    echo '<p class="mb-4"> <span class="sub-title">Service:</span> 
+                             ' . $row["service"] . '
+                            </p>';
+
+                                    echo '<p class="mb-4"> <span class="sub-title">Charges: </span>
+                                ' . $row["price"] . '  KES
+                               </p>';
+
+
+
+
+
+
+
+                                }
+                                ?>
+
+
+
                                 <button class="btn btn-secondary py-6 px-3 mt-1 me-3 location_btn" id="shareButton"> <i
                                         class="bi bi-geo-alt"></i>
                                     <?php echo $row['county']; ?>
@@ -225,13 +404,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <?php
                                         while ($row2 = $result2->fetch_assoc()) {
 
-                                        echo '<div class="col-md-12">
+                                            echo '<div class="col-md-12">
                                         <div class="review-card">
                                             <div class="card">
 
                                                 <div class="card-body">
-                                                    <h6 class="card-title">'.$row2['name'].'</h6>
-                                                    <p class="card-text">'.$row2['comment'].'</p>
+                                                    <h6 class="card-title">' . $row2['name'] . '</h6>
+                                                    <p class="card-text">' . $row2['comment'] . '</p>
                                                     <div class="text-start">
                                                         <span class="text-muted">Rating:</span>
                                                         <span class="text-warning">&#9733; &#9733; &#9733; &#9733;
@@ -241,11 +420,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             </div>
                                             </div>
                                         </div>';
-    }
-    ?>
-                                    
+                                        }
+                                        ?>
 
-                                        
+
+
 
                                     </div>
                                 </div>
@@ -253,15 +432,302 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
 
                         <!-- Share button -->
-                        <button class="btn btn-secondary py-3 px-3 mt-3 me-3 action_btn" id="shareButton"> <i
-                                class="bi bi-telephone"></i> <a href="tel:<?php echo $row['phone']; ?> ">Conatct</a>
+                        <button class="btn btn-secondary py-3 px-3 mt-3 me-3 action_btn2" id="shareButton"> <i
+                                class="bi bi-telephone"></i> <a href="tel:<?php echo $row['phone']; ?> ">Contact</a>
 
                             <!-- Contact Seller button -->
                             <button class="btn btn-primary py-3 px-3 mt-3 action_btn" id="contactSellerButton"
-                                data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-star"></i> Leave review</button>
+                                data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-star"></i> Leave
+                                a review</button>
+                            <br>
 
-                            <a class="btn btn-primary py-3 px-3 mt-3 action_btn" href="#"><i
-                                    class="bi bi-share"></i>Share</a>
+
+
+                            <p><strong>Share
+                                    <?php echo $row['name']; ?> profile
+                                </strong></p>
+
+                            <ul>
+
+                                <a target="_blank"
+                                    href="http://www.facebook.com/sharer.php?u=<?php echo $currentURL; ?>"> <img
+                                        src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/facebook_circle_color-128.png"
+                                        height="40px" width="40px">
+
+                                    <a target="_blank"
+                                        href="http://twitter.com/share?text=Visit the link &url=<?php echo $currentURL; ?>&hashtags=Hannasconnect,service providers,companies,indivudual service providers,Hire me profiles,Kenya,Nairobi,emergency services">
+                                        <img src="https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Twitter2_colored_svg-512.png"
+                                            height="40px" width="40px">
+
+                                        <a target="_blank"
+                                            href="http://www.linkedin.com/shareArticle?mini=true&url=<?php echo $currentURL; ?>">
+                                            <img src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/linkedin_circle_color-512.png"
+                                                height="40px" width="40px">
+
+                                            <a target="_blank"
+                                                href="http://pinterest.com/pin/create/button/?url=<?php echo $currentURL; ?>">
+                                                <img src="https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Pinterest_colored_svg-512.png"
+                                                    height="40px" width="40px">
+                                                <a target="_blank" href="<?php echo $whatsappShareLink; ?>">
+                                                    <img src="https://cdn3.iconfinder.com/data/icons/social-media-2169/24/social_media_social_media_logo_whatsapp-512.png"
+                                                        height="40px" width="40px" alt="Share via WhatsApp">
+                                                </a>
+                            </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="container-xxl py-5 small_screen_view" style="display:none">
+            <div class="container">
+                <div class="row g-5 align-items-top">
+                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                        <div class="row g-0 about-bg rounded overflow-hidden">
+                            <div class="col-6 col-sm-6 text-start">
+                                <img class="img-fluid w-100 profile-image" src="<?php echo $image; ?>">
+                            </div>
+
+                            <div class="col-6 col-sm-6 text-start">
+    <div class="card border-0 bg-transparent">
+        <div class="card-body">
+            <h1 class="card-title mb-3"><?php echo $row["name"]; ?></h1>
+            <p class="card-text" style="font-size: 10px;"> <span class="sub-title">Slogan: </span><?php echo $row["slogan"]; ?></p>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                        <h1 class="mb-4">
+                        <button class="btn btn-secondary mt-3 location_btn" id="shareButton">
+                <?php echo $cat; ?>
+            </button>
+
+                        </h1>
+
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" id="productTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" id="reviews-tab" data-bs-toggle="tab" href="#reviews"
+                                    role="tab" aria-controls="reviews" aria-selected="true">Details</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="details-tab" data-bs-toggle="tab" href="#details" role="tab"
+                                    aria-controls="details" aria-selected="false">Reviews</a>
+                            </li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content" id="productTabContent">
+                            <div class="tab-pane fade show active" id="reviews" role="tabpanel"
+                                aria-labelledby="reviews-tab">
+                                <!-- Reviews content goes here -->
+                                <br>
+                                <p class="mb-4"><i class="bi bi-building"></i>
+                                    <?php echo $row["profession"]; ?>
+
+                                </p>
+                               
+                                <?php
+                                if ($row['category_id'] === "4") {
+                                   
+                                    echo '<p class="mb-4"> <span class="sub-title">Looking for: </span>
+                             ' . $row["looking_for"] . ' 
+                            </p>';
+                                    echo '<p class="mb-4"> <span class="sub-title"> Experience:</span> ' . $row['experience'] . '
+                               </p>';
+
+                                    echo ' <p class="mb-4">
+                                    <button class="btn btn-secondary py-12 px-3 mt-1 me-3 location_btn"
+                                        id="shareButton"> <i class="bi bi-eye"></i>
+                                        <a href="uploads/' . $row["cv_url"] . '" style="color: black;">View CV</a>
+
+                                    </button>
+
+                                </p>';
+
+                                }
+
+                                if ($row['category_id'] === "2") {
+                                   
+                                    echo '<p class="mb-4"> <span class="sub-title">Message to customers: </span>
+                             ' . $row["message"] . '
+                            </p>';
+                                    echo '<p class="mb-4"> <span class="sub-title">Known for: </span>
+                             ' . $row["bkf"] . ' 
+                            </p>';
+
+                                    echo '<p class="mb-4"> <span class="sub-title">Website:</span> 
+                                ' . $row["website"] . ' 
+                               </p>';
+                                    echo '<br>';
+
+                                    echo '<h4> We deal with.</h4>';
+                                    $keyWords = json_decode($row['key_words'], true);
+                                    echo '<ol>'; // Assuming 'key_words' is a JSON array
+                                    echo '<li>' . implode('</li><li>', $keyWords) . '</li>';
+                                    $count++;
+                                    echo '</ol';
+
+
+
+                                }
+
+                                if ($row['category_id'] === "1") {
+                                    
+                                    echo '<p class="mb-4"> <span class="sub-title">Open days:</span> 
+                             ' . $row["working_days"] . '
+                            </p>';
+                                    echo '<p class="mb-4"> <span class="sub-title">Opens at: </span>
+                             ' . $row["open_at"] . '
+                            </p>';
+                                    echo '<p class="mb-4"> <span class="sub-title">Closes at: </span>
+                             ' . $row["clsoing_at"] . '
+                            </p>';
+                                    echo '<p class="mb-4"> <span class="sub-title">Known for: </span>
+                             ' . $row["bkf"] . ' 
+                            </p>';
+
+                                    echo '<p class="mb-4"> <span class="sub-title">Website: </span>
+                                ' . $row["website"] . ' 
+                               </p>';
+                                    echo '<p class="mb-4"> <span class="sub-title">Charges: </span>
+                                ' . $row["price"] . '  KES
+                               </p>';
+
+                                    echo '<br>';
+
+                                    echo '<h4> I deal with.</h4>';
+                                    $keyWords = json_decode($row['key_words'], true);
+                                    echo '<ol>'; // Assuming 'key_words' is a JSON array
+                                    echo '<li>' . implode('</li><li>', $keyWords) . '</li>';
+                                    $count++;
+                                    echo '</ol';
+
+
+
+
+
+
+                                }
+
+
+                                if ($row['category_id'] === "3") {
+                                    
+                                    echo '<p class="mb-4"> <span class="sub-title">Service:</span> 
+                             ' . $row["service"] . '
+                            </p>';
+
+                                    echo '<p class="mb-4"> <span class="sub-title">Charges: </span>
+                                ' . $row["price"] . '  KES
+                               </p>';
+
+
+
+
+
+
+
+                                }
+                                ?>
+
+
+
+                                <button class="btn btn-secondary py-6 px-3 mt-1 me-3 location_btn" id="shareButton"> <i
+                                        class="bi bi-geo-alt"></i>
+                                    <?php echo $row['county']; ?>
+                                </button>
+
+                                <!-- Contact Seller button -->
+                                <button class="btn btn-primary py-3 px-3 mt-1 location_btn" id="contactSellerButton"><i
+                                        class="bi bi-geo-alt"></i>
+                                    <?php echo $row['sub_counry']; ?>
+                                </button>
+
+                                <a class="btn btn-primary py-3 px-3 mt-1 location_btn" href="#"><i
+                                        class="bi bi-geo-alt"></i>
+                                    <?php echo $row['ward']; ?>
+                                </a>
+                            </div>
+                            <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
+                                <!-- Product details content goes here -->
+                                <div class="container mt-2">
+                                    <div class="row">
+                                        <?php
+                                        while ($row2 = $result2->fetch_assoc()) {
+
+                                            echo '<div class="col-md-12">
+                                        <div class="review-card">
+                                            <div class="card">
+
+                                                <div class="card-body">
+                                                    <h6 class="card-title">' . $row2['name'] . '</h6>
+                                                    <p class="card-text">' . $row2['comment'] . '</p>
+                                                    <div class="text-start">
+                                                        <span class="text-muted">Rating:</span>
+                                                        <span class="text-warning">&#9733; &#9733; &#9733; &#9733;
+                                                            &#9734;</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>';
+                                        }
+                                        ?>
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Share button -->
+                        <button class="btn btn-secondary py-3 px-3 mt-3 me-3 action_btn2" id="shareButton"> <i
+                                class="bi bi-telephone"></i> <a href="tel:<?php echo $row['phone']; ?> ">Contact</a>
+
+                            <!-- Contact Seller button -->
+                            <button class="btn btn-primary py-3 px-3 mt-3 action_btn" id="contactSellerButton"
+                                data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-star"></i> Leave
+                                a review</button>
+                            <br>
+
+
+
+                            <p><strong>Share
+                                    <?php echo $row['name']; ?> profile
+                                </strong></p>
+
+                            <ul>
+
+                                <a target="_blank"
+                                    href="http://www.facebook.com/sharer.php?u=<?php echo $currentURL; ?>"> <img
+                                        src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/facebook_circle_color-128.png"
+                                        height="40px" width="40px">
+
+                                    <a target="_blank"
+                                        href="http://twitter.com/share?text=Visit the link &url=<?php echo $currentURL; ?>&hashtags=Hannasconnect,service providers,companies,indivudual service providers,Hire me profiles,Kenya,Nairobi,emergency services">
+                                        <img src="https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Twitter2_colored_svg-512.png"
+                                            height="40px" width="40px">
+
+                                        <a target="_blank"
+                                            href="http://www.linkedin.com/shareArticle?mini=true&url=<?php echo $currentURL; ?>">
+                                            <img src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/linkedin_circle_color-512.png"
+                                                height="40px" width="40px">
+
+                                            <a target="_blank"
+                                                href="http://pinterest.com/pin/create/button/?url=<?php echo $currentURL; ?>">
+                                                <img src="https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Pinterest_colored_svg-512.png"
+                                                    height="40px" width="40px">
+                                                <a target="_blank" href="<?php echo $whatsappShareLink; ?>">
+                                                    <img src="https://cdn3.iconfinder.com/data/icons/social-media-2169/24/social_media_social_media_logo_whatsapp-512.png"
+                                                        height="40px" width="40px" alt="Share via WhatsApp">
+                                                </a>
+                            </ul>
                     </div>
                 </div>
             </div>
@@ -282,6 +748,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <h6 class="text-danger" style="margin: 20px; font-size: 12px">Please note you must login first to leave
+                    a review</h6>
+
                 <div class="modal-body">
                     <form id="reviewForm" action="" method="post">
                         <div class="mb-3">

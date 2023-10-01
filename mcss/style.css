@@ -552,7 +552,30 @@ background: var(--grey);
         margin: 10px auto; /* Center-align buttons and add margin */
         text-align: center; /* Center-align button text */
     }
+    .di{
+        display: none !important;
+    }
+    .description-prod{
+        display: none;
+    }
+    .card-buttons{
+        display: none !important;
+    }
+    .wsk-cp-product{
+        height: 230px;
+        border-radius: 10px !important;
+        
+    }
+    .large_screen_view{
+        display: none;
+
+    }
+    .small_screen_view{
+        display: block !important;
+    }
 }
+
+
 
 
 

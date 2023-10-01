@@ -110,6 +110,11 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="row form-group">
+                                                <div class="col-12 text-right">
+                                                    <p class="text-muted mb-0"><a href="password_request.php" class="text-muted font-weight-bold ml-1"><b>Forgot password</b></a></p>
+                                                </div>
+                                            </div>
                                                 <div class="form-group">
                                                     <input type="submit" class="brown-btn-filled w-100 waves-effect waves-light" value="Login" id="login-button">
                                                 </div>

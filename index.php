@@ -14,15 +14,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "SELECT users.*, services.* FROM users INNER JOIN services ON users.id = services.user_id WHERE 1";
 
 
-    if (!empty($county) && $county!=="Select county") {
+    if (!empty($county) && $county!=="County") {
         $sql .= " AND services.county = '$county'";
     }
 
-    if (!empty($constituency) && $constituency!=="Select constituency") {
+    if (!empty($constituency) && $constituency!=="Constituency") {
         $sql .= " AND services.sub_counry = '$constituency'";
     }
 
-    if (!empty($ward) && $ward !=="Select ward") {
+    if (!empty($ward) && $ward !=="Ward") {
         $sql .= " AND services.ward = '$ward'";
     }
 
@@ -153,6 +153,26 @@ $result = $conn->query($sql);
             background-color: #FBFBFD;
             /* Customize the background color */
         }
+        @media screen and (max-width: 768px) {
+  .hidden-on-small {
+    display: none;
+  }
+  
+}
+.badge {
+    
+    color: white; /* Text color */
+    font-size: 13px; /* Font size */
+    padding: 5px 10px; /* Padding around the badge text */
+    border-radius: 5px; /* Rounded corners */
+    position: absolute; /* Position the badge */
+    top: 10px; /* Adjust the top position as needed */
+    left: 10px; /* Adjust the left position as needed */
+    width: 80px ;
+}
+/* Add this CSS to your stylesheet */
+
+
     </style>
 
 </head>
@@ -176,7 +196,16 @@ $result = $conn->query($sql);
                     <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                         <h1 class="mb-4">Discover Top Talent and Service Providers</h1>
                         <p class="mb-4">Say goodbye to intermediaries. Connect directly with potential talents or service providers and discuss at length with them</p>
-                        <a href="" class='brown-btn-filled'>Learn More <img src="img/new/arrow-in-circle.svg"></a>
+                         <?php
+                        if (isset($_SESSION['user'])) {
+                            echo '<a href="add_listing.php" class="brown-btn-filled">Add Listing <img src="img/new/arrow-in-circle.svg"></a>';
+                        }
+                        else{
+                            echo'<a href="login.php" class="brown-btn-filled">Get started <img src="img/new/arrow-in-circle.svg"></a>';
+                        }
+
+                        
+                        ?>
 
 
                     </div>
@@ -219,7 +248,7 @@ $result = $conn->query($sql);
                         <div class="col-6 col-sm-3">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
                                 <select class="form-control form-control-md mb-3 input-btn" id="county" name="county">
-                                    <option>Select county 
+                                    <option>County 
                                          </option>
                                 </select>
                                 <i class="fa fa-chevron-down"></i>
@@ -229,7 +258,7 @@ $result = $conn->query($sql);
                         <div class="col-6 col-sm-3">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
                                 <select class="form-control form-control-md mb-3 input-btn" id="constituency" name="constituency">
-                                    <option>Select constituency</option>
+                                    <option>Constituency</option>
                                 </select>
                                 <i class="fa fa-chevron-down"></i>
 
@@ -238,7 +267,7 @@ $result = $conn->query($sql);
                         <div class="col-6 col-sm-3">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
                                 <select class="form-control form-control-md mb-3 input-btn" id="ward" name="ward">
-                                    <option>Select ward</option>
+                                    <option>Ward</option>
                                 </select>
                                 <i class="fa fa-chevron-down"></i>
 
@@ -247,7 +276,7 @@ $result = $conn->query($sql);
                         <div class="col-6 col-sm-3">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
                                 <select class="form-control form-control-md mb-3 input-btn" name="category">
-                                    <option value="0">Select category</option>
+                                    <option value="0">Category</option>
                                     <option value="1">individual</option>
                                     <option value="2">Business (Company)</option>
                                     <option value="3">Emergency services</option>
@@ -262,7 +291,7 @@ $result = $conn->query($sql);
                                 <div class="input-group">
                                     <!-- Input field to trigger map picker -->
                                     <input type="text" class="form-control input-btn" id="locationInput"
-                                        placeholder="Nearby search" aria-label="Location" name="location">
+                                        placeholder="Nearby" aria-label="Location" name="location">
                                     
                                     
                                 </div>
@@ -273,7 +302,7 @@ $result = $conn->query($sql);
                         <div class="col-6 col-sm-6"> <!-- Updated col-6 to col-12 col-sm-6 -->
                             <div class="form-group m-0">
                                 <div class="input-group">
-                                    <input type="text" class="form-control input-btn" placeholder="I am looking for ..." name="keyword" 
+                                    <input type="text" class="form-control input-btn" placeholder="Looking for" name="keyword" 
                                         aria-label="keword">
                                     <div class="input-group-append ms-2">
                                         <button class="brown-btn-filled " type="submit"><i class="mdi mdi-magnify"></i> Search</button>
@@ -292,34 +321,45 @@ $result = $conn->query($sql);
 
         <!-- Category Start -->
         <section id="category" class="container-xxl py-5">
-            <div class="container ">
+            <div class="container" id="providers">
                 <h2 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Featured service providers</h2>
                 <div class="row g-4">
 
                     <?php
                     // Loop through the query result and generate subject cards
                     
+                    
                     while ($row = $result->fetch_assoc()) {
+                        $badge='<span class="badge bg-success">Open </span>';
                         $cat = "";
-                        $image = "";
+                        $image = "uploads/logo.png";
+                        if ($row['image_url'] !== null && $row['image_url'] !== "") {
+                            $image = 'uploads/' . $row['image_url'];
+                        }
                         if ($row['category_id'] === "1") {
                             $cat = "Individual";
-                            $image = "img/new/provider-img.png";
+                            
                         } elseif ($row['category_id'] === "2") {
                             $cat = "Company";
-                            $image = "img/new/provider-img.png";
+                            
                         } elseif ($row['category_id'] === "3") {
-                            $cat = "Emergency";
-                            $image = "img/new/provider-img.png";
+                            $cat = "Emergency services";
+                            
                         } else {
                             $cat = "Hire me";
-                            $image = "img/new/provider-img.png";
+                            
                         }
+                        if($row['status']==="0"){
+                            $badge='<span class="badge bg-danger">Closed</span>';
+                        }
+                        
 
 
                         echo '
                 <div class="col-lg-3 col-md-6 col-sm-6 col-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="wsk-cp-product">
+                    <a href="user_details.php?id=' . $row["id"] . '"><div class="wsk-cp-product">
+                    <!-- Badge -->
+                        '.$badge.'
                         <div class="wsk-cp-img">
                         <img src="'.$image.'" alt="Product" class="img-responsive" />
                         </div>
@@ -339,12 +379,13 @@ $result = $conn->query($sql);
                                  
                                 <p class="mb-2">Contact: <b>' . $row["phone"] . '</b></p>
                             </div>      
-                            <div class="d-flex justify-content-between me-2 align-items-center w-100">
-                                <a class="brown-btn-filled" href="user_details.php?id=' . $row["id"] . '">More Details <img src="img/new/more-icon.svg"> </a>
-                                <a href="#" class="review-pill"><i class="fa fa-star"></i>2 Reviews </a>
+                            <div class="d-flex  mb-2 pe-3 justify-content-between w-100 card-buttons">
+
+                                <a href="#" class="review-pill"><i class="fa fa-star"></i>0 Reviews </a>
                             </div>
                         </div>
                     </div>
+                    </a>
                 </div>
 ';
         }
@@ -368,7 +409,7 @@ $result = $conn->query($sql);
 
         <!-- About Start -->
         <section id="about" class="container-xxl py-5">
-            <div class="container">
+            <div class="container" id="blog">
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                         <img src="img/new/login-img.svg" class="img-fluid" alt="">

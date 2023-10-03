@@ -54,6 +54,31 @@
         ]
     });
 
+    /**
+   * hero Slider
+   */
+    new Swiper('.hero-swiper', {
+        speed: 600,
+        loop: true,
+        autoplay: {
+          delay: 6000,
+          disableOnInteraction: true
+        },
+        slidesPerView: 1,
+        pagination: {
+          el: '.swiper-pagination',
+          type: 'bullets',
+          clickable: true
+        },
+  
+        // Navigation arrows
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        
+      });
+  
 
     // Testimonials carousel
     $(".testimonial-carousel").owlCarousel({

@@ -36,8 +36,8 @@
                     </div>
                 </div></a>';
             } else {
-                echo '<a href="login.php" class="nav-item nav-link"><h6 class="brown-btn-outline"> <img src="img/new/login-icon.svg" class="social-icon" alt=""> Login </h6></a>';
-                echo '<a href="signup.php" class="nav-item nav-link"><h6 class="brown-btn-filled"><i class="fa fa-user-plus"></i> Register </h6></a>';
+                echo '<a href="login.php" class="nav-item nav-link">  Login </a>';
+                echo '<a href="signup.php" class="nav-item nav-link">Register </a>';
             }
             ?>
         </div>

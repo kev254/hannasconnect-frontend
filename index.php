@@ -70,6 +70,8 @@ $result = $conn->query($sql);
     <!-- Libraries Stylesheet -->
     <link href="lib/animate/animate.min.css" rel="stylesheet">
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="mcss/bootstrap.min.css" rel="stylesheet">
@@ -158,19 +160,19 @@ $result = $conn->query($sql);
     display: none;
   }
   
-}
-.badge {
-    
-    color: white; /* Text color */
-    font-size: 13px; /* Font size */
-    padding: 5px 10px; /* Padding around the badge text */
-    border-radius: 5px; /* Rounded corners */
-    position: absolute; /* Position the badge */
-    top: 10px; /* Adjust the top position as needed */
-    left: 10px; /* Adjust the left position as needed */
-    width: 80px ;
-}
-/* Add this CSS to your stylesheet */
+    }
+    .badge {
+        
+        color: white; /* Text color */
+        font-size: 13px; /* Font size */
+        padding: 5px 10px; /* Padding around the badge text */
+        border-radius: 5px; /* Rounded corners */
+        position: absolute; /* Position the badge */
+        top: 10px; /* Adjust the top position as needed */
+        left: 10px; /* Adjust the left position as needed */
+        width: 80px ;
+    }
+    /* Add this CSS to your stylesheet */
 
 
     </style>
@@ -189,14 +191,27 @@ $result = $conn->query($sql);
         </div> -->
         <!-- Spinner End -->
         <?php include 'mainNavbar.php'; ?>
-        <!-- Carousel Start -->
-        <section id="about hero-section" class="container-xxl py-5">
-            <div class="container">
-                <div class="row g-5 align-items-center flex-wrap-reverse">
-                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                        <h1 class="mb-4">Discover Top Talent and Service Providers</h1>
-                        <p class="mb-4">Say goodbye to intermediaries. Connect directly with potential talents or service providers and discuss at length with them</p>
-                         <?php
+
+          <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex justify-cntent-center align-items-center">
+    <!-- slider -->
+    <div class="swiper-container swiper hero-swiper">
+
+      <div class="swiper-wrapper">
+
+
+
+        <div class="swiper-slide"><img src="img/new/slider/img.png" class="carousel-img" alt="Hannasconnect">
+        <!-- <div class="bg-overlay"></div> -->
+
+          <div class="swiper-text">
+            <h2>
+            Discover Top Talent and Service Providers
+            </h2>
+            <p>
+           Connect directly with people all over the country
+            </p>
+            <?php
                         if (isset($_SESSION['user'])) {
                             echo '<a href="add_listing.php" class="brown-btn-filled">Add Listing <img src="img/new/arrow-in-circle.svg"></a>';
                         }
@@ -206,6 +221,97 @@ $result = $conn->query($sql);
 
                         
                         ?>
+           </div>
+        </div>
+
+        <div class="swiper-slide"><img src="img/new/slider/img-1.png" class="carousel-img" alt="Hannasconnect">
+        <!-- <div class="bg-overlay"></div> -->
+
+          <div class="swiper-text">
+            <h2>
+            Discover Top Talent and Service Providers
+            </h2>
+            <p>
+           Connect directly with people all over the country
+            </p>
+            <?php
+                        if (isset($_SESSION['user'])) {
+                            echo '<a href="add_listing.php" class="brown-btn-filled">Add Listing <img src="img/new/arrow-in-circle.svg"></a>';
+                        }
+                        else{
+                            echo'<a href="login.php" class="brown-btn-filled">Get started <img src="img/new/arrow-in-circle.svg"></a>';
+                        }
+
+                        
+                        ?>
+           </div>
+        </div>
+
+        <div class="swiper-slide"><img src="img/new/slider/img-2.png" class="carousel-img" alt="Hannasconnect">
+        <!-- <div class="bg-overlay"></div> -->
+
+          <div class="swiper-text">
+            <h2>
+            Discover Top Talent and Service Providers
+            </h2>
+            <p>
+           Connect directly with people all over the country
+            </p>
+            <?php
+                        if (isset($_SESSION['user'])) {
+                            echo '<a href="add_listing.php" class="brown-btn-filled">Add Listing <img src="img/new/arrow-in-circle.svg"></a>';
+                        }
+                        else{
+                            echo'<a href="login.php" class="brown-btn-filled">Get started <img src="img/new/arrow-in-circle.svg"></a>';
+                        }
+
+                        
+                        ?>
+           </div>
+        </div>
+
+        <div class="swiper-slide"><img src="img/new/slider/img-3.png" class="carousel-img" alt="Hannasconnect">
+        <!-- <div class="bg-overlay"></div> -->
+
+          <div class="swiper-text">
+            <h2>
+            Discover Top Talent and Service Providers
+            </h2>
+            <p>
+           Connect directly with people all over the country
+            </p>
+            <?php
+                        if (isset($_SESSION['user'])) {
+                            echo '<a href="add_listing.php" class="brown-btn-filled">Add Listing <img src="img/new/arrow-in-circle.svg"></a>';
+                        }
+                        else{
+                            echo'<a href="login.php" class="brown-btn-filled">Get started <img src="img/new/arrow-in-circle.svg"></a>';
+                        }
+
+                        
+                        ?>
+           </div>
+        </div>
+      </div>
+
+      <div class="swiper-pagination"></div>
+
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+
+
+    </div>
+
+  </section><!-- End Hero -->
+
+        <!--  Start old hero-->
+        <!-- <section id="about hero-section" class="container-xxl py-5">
+            <div class="container">
+                <div class="row g-5 align-items-center flex-wrap-reverse">
+                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                        <h1 class="mb-4">Discover Top Talent and Service Providers</h1>
+                        <p class="mb-4">Say goodbye to intermediaries. Connect directly with potential talents or service providers and discuss at length with them</p>
+                         
 
 
                     </div>
@@ -225,7 +331,6 @@ $result = $conn->query($sql);
                 </div>
                 <div class="row mt-4">
                     <div class="col-lg-3 col-sm-4 wow fadeIn" data-wow-delay="0.8s">
-                        <!-- Google Play button -->
                         <a href="#" target="_blank" class="market-btn google-btn" role="button">
                             <span class="market-button-subtitle">Download on the</span>
                             <span class="market-button-title">Google Play</span>
@@ -235,8 +340,8 @@ $result = $conn->query($sql);
                 </div>
 
             </div>
-        </section>
-        <!-- Carousel End -->
+        </section> -->
+        <!--  End old hero-->
         <!-- Category Start -->
         <section id="category2 " class="container-xxl py-5">
             <div class="container">
@@ -445,6 +550,7 @@ $result = $conn->query($sql);
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/waypoints/waypoints.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>

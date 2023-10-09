@@ -4,7 +4,7 @@ session_start();
 $sql = "SELECT users.*, services.* FROM users INNER JOIN services ON users.id = services.user_id limit 8;";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $county=$_POST['county'];
+    $county=$conn->real_escape_string($_POST['county']);
     $constituency = $_POST["constituency"];
     $ward = $_POST["ward"];
     $category = $_POST["category"];

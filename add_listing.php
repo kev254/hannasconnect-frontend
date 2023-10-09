@@ -12,13 +12,13 @@ if (isset($_POST['send'])) {
     $category = $_POST['category'];
     $name = $_POST['name'];
     $slogan = $_POST['slogan'];
-    $county = $_POST['county'];
-    $sub_county = $_POST['sub_county'];
-    $ward = $_POST['ward'];
+    $county = $conn->real_escape_string($_POST['county']);
+    $sub_county = $conn->real_escape_string($_POST['sub_county']);
+    $ward = $conn->real_escape_string($_POST['ward']);
     $email = $_POST['email'];
     $phone = $_POST['phone']; // Using MD5 for password hashing
     $password = md5($_POST['password']);
-    $ibfk = $_POST['ibfk'];
+    $ibfk = $conn->real_escape_string($_POST['ibfk']);
     $i_physical_address = $_POST['i_physical_address'];
     $i_location_pin = $_POST['i_location_pin'];
     $i_website = $_POST['i_website'];
@@ -131,7 +131,7 @@ if (isset($_POST['send'])) {
 
 
 
-    $bbfk = $_POST['bbfk'];
+    $bbfk = $conn->real_escape_string($_POST['bbfk']);
     $b_branches = $_POST['b_branches'];
     $b_location_pin = $_POST['b_location_pin'];
     $b_website = $_POST['b_website'];
@@ -145,7 +145,7 @@ if (isset($_POST['send'])) {
 
 
     //Hire values
-    $hbfk = $_POST['hbfk'];
+    $hbfk = $conn->real_escape_string($_POST['hbfk']);
     $h_looking_for = $_POST['h_looking_for'];
     $h_profession = $_POST['h_profession'];
     $h_facility_level = $_POST['h_facility_level'];
@@ -379,7 +379,7 @@ $conn->close();
                                                                 id="ibkfcount" style="font-size: 11px;">150</span> words
                                                             required</label>
                                                         <textarea class="form-control form-control-user input-btn"
-                                                            name="ibfk" placeholder="Optional" minlength="150" rows="4"
+                                                            name="ibfk" placeholder="Optional" rows="4"
                                                             id="ibkf"></textarea>
                                                     </div>
                                                     <div class="col-md-6 col-sm-12">
@@ -663,7 +663,7 @@ $conn->close();
                                                                 id="bbkfcount" style="font-size: 11px;">150</span> words
                                                             required</label>
                                                         <textarea class="form-control form-control-user input-btn"
-                                                            name="bbfk" placeholder="Optional" minlength="150" rows="4"
+                                                            name="bbfk" placeholder="Optional" rows="4"
                                                             id="bbkf"></textarea>
                                                     </div>
 
@@ -917,7 +917,7 @@ $conn->close();
                                                                 id="hbkfcount" style="font-size: 11px;">150</span> words
                                                             required</label>
                                                         <textarea class="form-control form-control-user input-btn"
-                                                            name="hbfk" placeholder="Optional" minlength="150" rows="4"
+                                                            name="hbfk" placeholder="Optional" rows="4"
                                                             id="hbkf"></textarea>
                                                     </div>
                                                     <div class="col-md-6 col-sm-12">

@@ -534,6 +534,108 @@ $result = $conn->query($sql);
         <!-- <div id="map" style="width: 100%; height: 400px; visibility: hidden;"></div> -->
         <!-- About End -->
 
+           <!-- ======= Frequently Asked Questions Section ======= -->
+    <section id="faq" class="faq">
+        <div class="container" data-aos="fade-up">
+            <h2 class="section-title-large text-center">Frequently Asked Questions (FAQs)</h2>
+
+
+            <div class="accordion-list">
+                <ul>
+                    <li data-aos="fade-up">
+                        <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse"
+                            data-bs-target="#accordion-list-1">How to register? <i
+                                class="bx bx-chevron-down-circle icon-show"></i><i
+                                class="bx bxs-chevron-up-circle icon-close"></i></a>
+                        <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
+                            <p>Click <a href="/register">here</a> to access registration form.
+                            <p>
+                            <p>Fill the required fields and submit</p>
+                            <p>Complete the registrartion by filling the second form</p>
+                            <p>Go to profile and verify your contacts</p>
+                        </div>
+                    </li>
+
+                    <li data-aos="fade-up" data-aos-delay="100">
+                        <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse"
+                            data-bs-target="#accordion-list-2" class="collapsed">How enroll for a package? <i
+                                class="bx bx-chevron-down-circle icon-show"></i><i
+                                class="bx bxs-chevron-up-circle icon-close"></i></a>
+                        <div id="accordion-list-2" class="collapse" data-bs-parent=".accordion-list">
+                            <p>Go to your wallet</p>
+                            <p>Enter the amont you want to deposit, you can deposit any amount.</p>
+                            <p>Once your wallet balance is enough for a subscription. Go to subscription page.</p>
+                            <p>Select the package you want to subscribe to.</p>
+                            <p>Select wallet as source of payment</p>
+                            <p>Proceed with subscription</p>
+                            <p><b>NOTE</b> The persons who subscribe to the highest package are given priority to paying
+                                employers.</p>
+                            </p>
+                        </div>
+                    </li>
+
+                    <li data-aos="fade-up" data-aos-delay="200">
+                        <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse"
+                            data-bs-target="#accordion-list-3" class="collapsed">How to submit application for placement?
+                            <i class="bx bx-chevron-down-circle icon-show"></i><i
+                                class="bx bxs-chevron-up-circle icon-close"></i></a>
+                        <div id="accordion-list-3" class="collapse" data-bs-parent=".accordion-list">
+                            <p>
+                                Go to applications
+                            </p>
+                            <p>Click add new application</p>
+                            <p>Fill the form as per the instructions</p>
+                            <p>Submit your application.</p>
+                            <p>Once your application has been approved, you will be placed and notified with relavant
+                                details</p>
+                            <p>
+
+                            </p>
+                            <p>We guarantee a refund of paid up subscription should we not attach the applicant in 90
+                                days from the date of full payment.</p>
+                        </div>
+                    </li>
+
+                    <li data-aos="fade-up" data-aos-delay="300">
+                        <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse"
+                            data-bs-target="#accordion-list-4" class="collapsed">What is lipa mdogo mdogo? <i
+                                class="bx bx-chevron-down-circle icon-show"></i><i
+                                class="bx bxs-chevron-up-circle icon-close"></i></a>
+                        <div id="accordion-list-4" class="collapse" data-bs-parent=".accordion-list">
+                            <p>
+                                #
+                            </p>
+                        </div>
+                    </li>
+
+                    <li data-aos="fade-up" data-aos-delay="400">
+                        <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse"
+                            data-bs-target="#accordion-list-5" class="collapsed">What is akiba ya internship/attachment?
+                            <i class="bx bx-chevron-down-circle icon-show"></i><i
+                                class="bx bxs-chevron-up-circle icon-close"></i></a>
+                        <div id="accordion-list-5" class="collapse" data-bs-parent=".accordion-list">
+                            <p>
+                                At attachMe we help students and graduates think ahead of their time and realize that they
+                                should be ready for the opportunities that will present themselves no matter the location.
+                            <p>
+                                Sometimes people miss out on life changing opportunities that could spell transformation
+                                in career and livelihood because of lack of financial preparedness especially when these
+                                opportunities are availed away from individuals area of operation, comfort or convenience.
+                            <p>
+                                To cure this need we have designed a unique product (Akiba ya internship/Attachment)
+                                that will help the student or graduate to gradually save money for a reasonable period.
+                            <p>This
+                                amount will be availed in principal promptly and conveniently when the student or
+                                graduate is due for long term internship. </p>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+    </section><!-- End Frequently Asked Questions Section -->
+
         <!-- Testimonial Start -->
 
         <!-- Testimonial End -->

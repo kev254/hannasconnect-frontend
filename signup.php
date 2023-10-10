@@ -279,7 +279,7 @@ function sendEmail($name, $email, $message)
                                     </div> <!-- end .padding-5 -->
                                 </div>
                                 <div class="col-lg-5 col-md-6 d-none d-md-block ">
-                                    <img src="img/new/login-img.svg" class="img-fluid" alt="">
+                                    <img src="img/new/bg.png" class="img-fluid" alt="">
                                     <h3 class="mt-3 text-center">
                                         Welcome to Hannasconnect
                                     </h3>

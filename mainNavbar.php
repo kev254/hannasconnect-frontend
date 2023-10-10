@@ -10,7 +10,7 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0 align-items-center">
-            <a href="#category" class="nav-item nav-link">About US</a>
+            <a href="about.php" class="nav-item nav-link">About Us</a>
             <?php
             if (session_status() == PHP_SESSION_NONE) {
                 session_start();

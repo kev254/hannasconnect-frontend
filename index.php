@@ -156,9 +156,9 @@ $result = $conn->query($sql);
             /* Customize the background color */
         }
         @media screen and (max-width: 768px) {
-  .hidden-on-small {
-    display: none;
-  }
+    .hidden-on-small {
+        display: none;
+    }
   
     }
     .badge {

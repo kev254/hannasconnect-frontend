@@ -485,6 +485,12 @@ $conn->close();
                                                             <option value="Other">Other</option>
                                                         </select>
                                                     </div>
+                                                    <div class="col-md-6 col-sm-12 mb-3 mb-sm-0 hide-profession" id="show-other-prof">
+                                                        <label for="other_prof">Enter your profession</label>
+                                                        <input type="text"
+                                                            class="form-control form-control-user input-btn"
+                                                            name="other_profession" placeholder="Profession">
+                                                    </div>
                                                     <div class="col-md-6 col-sm-12">
                                                         <label for="">Do you have a physical
                                                             address</label>
@@ -1170,6 +1176,9 @@ $conn->close();
         var hireMeFields = document.getElementById('hireMeFields');
         var individualFields = document.getElementById('individualFields');
 
+        var profession = document.getElementById('profession');
+        var otherProfession = document.getElementById('show-other-prof');
+
         // get required input fields
         var sloganCheck = document.querySelector("#slogan");
         var countyCheck = document.querySelector("#county");
@@ -1188,6 +1197,15 @@ $conn->close();
         errorSection.style.display = 'none';
         submissionSection.style.display = 'none';
 
+
+        profession.addEventListener('change', function(){
+            if(profession.value=="Other"){
+                otherProfession.style.display = 'block';
+            }
+            else{
+                otherProfession.style.display = 'none';
+            }
+        })
         // on clicking next btn, go to various category
         nextBtn.addEventListener('click', function () {
             selectedCategory = categorySelect.value;

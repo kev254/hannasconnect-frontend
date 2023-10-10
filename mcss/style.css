@@ -39,7 +39,9 @@ row-gap: 8px;
 #hero{
     /* min-height: 80vh; */
 }
-
+.hide-profession{
+    display: none;
+}
 
 /*--------------------------------------------------------------
 # Frequently Asked Questions

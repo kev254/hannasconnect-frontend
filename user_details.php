@@ -205,20 +205,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body class="body">
     <div class="container-xxl p-0">
-        <!-- Spinner Start -->
-        <!-- <div id="spinner"
-            class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-warning" style="width: 3rem; height: 3rem; color: #f36639!important;"
-                role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div> -->
-        <!-- Spinner End -->
+
         <?php include 'mainNavbar.php'; ?>
 
 
         <!-- About Start -->
-        <section id="about" class="container-xxl py-5 large_screen_view" >
+        <section id="about" class="container-xxl py-5 large_screen_view">
             <div class="container">
                 <div class="row g-5 align-items-top">
                     <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
@@ -226,7 +218,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="col-12 text-start">
                                 <img class="img-fluid w-100 profile-image" src="<?php echo $image; ?>">
                             </div>
-                            
+
                         </div>
                     </div>
                     <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
@@ -244,6 +236,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link" id="details-tab" data-bs-toggle="tab" href="#details" role="tab"
                                     aria-controls="details" aria-selected="false">Reviews</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="details-tab" data-bs-toggle="tab" href="#contacts" role="tab"
+                                    aria-controls="details" aria-selected="false">Contact</a>
                             </li>
                         </ul>
 
@@ -278,6 +274,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </p>';
                                     echo '<p class="mb-4"> <span class="sub-title"> Experience:</span> ' . $row['experience'] . '
                                </p>';
+                               echo '<p class="mb-4"> <span class="sub-title">Email: </span>
+                               ' . $row["email"] . ' 
+                              </p>';
 
                                     echo ' <p class="mb-4">
                                     <button class="btn btn-secondary py-12 px-3 mt-1 me-3 location_btn"
@@ -304,6 +303,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     echo '<p class="mb-4"> <span class="sub-title">Website:</span> 
                                 ' . $row["website"] . ' 
                                </p>';
+                               echo '<p class="mb-4"> <span class="sub-title">Email: </span>
+                               ' . $row["email"] . ' 
+                              </p>';
+                              echo '<p class="mb-4"> <span class="sub-title">Charges: </span>
+                                ' . $row["price"] . '  KES
+                               </p>';
                                     echo '<br>';
 
                                     echo '<h4> We deal with.</h4>';
@@ -318,18 +323,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 }
 
                                 if ($row['category_id'] === "1") {
+                                    $amPmOpenTime = date("h:i A", strtotime($row["open_at"]));
+                                    $amPmCloseTime = date("h:i A", strtotime($row["clsoing_at"]));
                                     echo '<p class="mb-4"> <span class="sub-title">Slogan: </span>
                              ' . $row["slogan"] . '
                             </p>';
                                     echo '<p class="mb-4"> <span class="sub-title">Open days:</span> 
                              ' . $row["working_days"] . '
                             </p>';
-                                    echo '<p class="mb-4"> <span class="sub-title">Opens at: </span>
-                             ' . $row["open_at"] . '
-                            </p>';
-                                    echo '<p class="mb-4"> <span class="sub-title">Closes at: </span>
-                             ' . $row["clsoing_at"] . '
-                            </p>';
+                            echo '<p class="mb-4"> <span class="sub-title">Working Hours: </span> ' . $amPmOpenTime . ' -
+                            ' . $amPmCloseTime . ' 
+                           </p>';
                                     echo '<p class="mb-4"> <span class="sub-title">Known for: </span>
                              ' . $row["bkf"] . ' 
                             </p>';
@@ -337,6 +341,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     echo '<p class="mb-4"> <span class="sub-title">Website: </span>
                                 ' . $row["website"] . ' 
                                </p>';
+                               echo '<p class="mb-4"> <span class="sub-title">Email: </span>
+                               ' . $row["email"] . ' 
+                              </p>';
                                     echo '<p class="mb-4"> <span class="sub-title">Charges: </span>
                                 ' . $row["price"] . '  KES
                                </p>';
@@ -369,6 +376,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     echo '<p class="mb-4"> <span class="sub-title">Charges: </span>
                                 ' . $row["price"] . '  KES
                                </p>';
+                               echo '<p class="mb-4"> <span class="sub-title">Email: </span>
+                               ' . $row["email"] . ' 
+                              </p>';
 
 
 
@@ -429,9 +439,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Share button -->
+                            <div class="tab-pane fade" id="contacts" role="tabpanel" aria-labelledby="details-tab">
+                                <!-- Product details content goes here -->
+                                <div class="container mt-2">
+                                    <div class="row">
+                                        <!-- Share button -->
                         <button class="btn btn-secondary py-3 px-3 mt-3 me-3 action_btn2" id="shareButton"> <i
                                 class="bi bi-telephone"></i> <a href="tel:<?php echo $row['phone']; ?> ">Contact</a>
 
@@ -439,6 +452,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <button class="btn btn-primary py-3 px-3 mt-3 action_btn" id="contactSellerButton"
                                 data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-star"></i> Leave
                                 a review</button>
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        
                             <br>
 
 
@@ -488,22 +511,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </div>
 
                             <div class="col-6 col-sm-6 text-start">
-    <div class="card border-0 bg-transparent">
-        <div class="card-body">
-            <h1 class="card-title mb-3"><?php echo $row["name"]; ?></h1>
-            <p class="card-text" style="font-size: 10px;"> <span class="sub-title">Slogan: </span><?php echo $row["slogan"]; ?></p>
-            
-        </div>
-    </div>
-</div>
+                                <div class="card border-0 bg-transparent">
+                                    <div class="card-body">
+                                        <h1 class="card-title mb-3">
+                                            <?php echo $row["name"]; ?>
+                                        </h1>
+                                        <p class="card-text" style="font-size: 10px;"> <span class="sub-title">Slogan:
+                                            </span>
+                                            <?php echo $row["slogan"]; ?>
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
                     </div>
                     <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                         <h1 class="mb-4">
-                        <button class="btn btn-secondary mt-3 location_btn" id="shareButton">
-                <?php echo $cat; ?>
-            </button>
+                            <button class="btn btn-secondary mt-3 location_btn" id="shareButton">
+                                <?php echo $cat; ?>
+                            </button>
 
                         </h1>
 
@@ -511,18 +539,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" id="productTabs" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link active" id="reviews-tab" data-bs-toggle="tab" href="#reviews"
+                                <a class="nav-link active" id="reviews-tab" data-bs-toggle="tab" href="#reviews1"
                                     role="tab" aria-controls="reviews" aria-selected="true">Details</a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="details-tab" data-bs-toggle="tab" href="#details" role="tab"
+                                <a class="nav-link" id="details-tab" data-bs-toggle="tab" href="#details1" role="tab"
                                     aria-controls="details" aria-selected="false">Reviews</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="details-tab" data-bs-toggle="tab" href="#contacts1" role="tab"
+                                    aria-controls="details" aria-selected="false">Contact</a>
                             </li>
                         </ul>
 
                         <!-- Tab panes -->
                         <div class="tab-content" id="productTabContent">
-                            <div class="tab-pane fade show active" id="reviews" role="tabpanel"
+                            <div class="tab-pane fade show active" id="reviews1" role="tabpanel"
                                 aria-labelledby="reviews-tab">
                                 <!-- Reviews content goes here -->
                                 <br>
@@ -530,15 +562,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <?php echo $row["profession"]; ?>
 
                                 </p>
-                               
+
                                 <?php
+                               
                                 if ($row['category_id'] === "4") {
-                                   
+
                                     echo '<p class="mb-4"> <span class="sub-title">Looking for: </span>
                              ' . $row["looking_for"] . ' 
                             </p>';
                                     echo '<p class="mb-4"> <span class="sub-title"> Experience:</span> ' . $row['experience'] . '
                                </p>';
+                               echo '<p class="mb-4"> <span class="sub-title">Email: </span>
+                               ' . $row["email"] . ' 
+                              </p>';
 
                                     echo ' <p class="mb-4">
                                     <button class="btn btn-secondary py-12 px-3 mt-1 me-3 location_btn"
@@ -552,17 +588,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 }
 
                                 if ($row['category_id'] === "2") {
-                                   
+
                                     echo '<p class="mb-4"> <span class="sub-title">Message to customers: </span>
                              ' . $row["message"] . '
                             </p>';
                                     echo '<p class="mb-4"> <span class="sub-title">Known for: </span>
                              ' . $row["bkf"] . ' 
                             </p>';
+                            echo '<p class="mb-4"> <span class="sub-title">Charges: </span>
+                                ' . $row["price"] . '  KES
+                               </p>';
 
                                     echo '<p class="mb-4"> <span class="sub-title">Website:</span> 
                                 ' . $row["website"] . ' 
                                </p>';
+                               echo '<p class="mb-4"> <span class="sub-title">Email: </span>
+                               ' . $row["email"] . ' 
+                              </p>';
                                     echo '<br>';
 
                                     echo '<h4> We deal with.</h4>';
@@ -577,15 +619,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 }
 
                                 if ($row['category_id'] === "1") {
-                                    
+                                    $amPmOpenTime = date("h:i A", strtotime($row["open_at"]));
+                                    $amPmCloseTime = date("h:i A", strtotime($row["clsoing_at"]));
+
                                     echo '<p class="mb-4"> <span class="sub-title">Open days:</span> 
                              ' . $row["working_days"] . '
                             </p>';
-                                    echo '<p class="mb-4"> <span class="sub-title">Opens at: </span>
-                             ' . $row["open_at"] . '
-                            </p>';
-                                    echo '<p class="mb-4"> <span class="sub-title">Closes at: </span>
-                             ' . $row["clsoing_at"] . '
+                                   
+                                    echo '<p class="mb-4"> <span class="sub-title">Working Hours: </span> ' . $amPmOpenTime . ' -
+                             ' . $amPmCloseTime . ' 
                             </p>';
                                     echo '<p class="mb-4"> <span class="sub-title">Known for: </span>
                              ' . $row["bkf"] . ' 
@@ -597,6 +639,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     echo '<p class="mb-4"> <span class="sub-title">Charges: </span>
                                 ' . $row["price"] . '  KES
                                </p>';
+                               echo '<p class="mb-4"> <span class="sub-title">Email: </span>
+                               ' . $row["email"] . ' 
+                              </p>';
 
                                     echo '<br>';
 
@@ -616,7 +661,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
                                 if ($row['category_id'] === "3") {
-                                    
+
                                     echo '<p class="mb-4"> <span class="sub-title">Service:</span> 
                              ' . $row["service"] . '
                             </p>';
@@ -624,6 +669,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     echo '<p class="mb-4"> <span class="sub-title">Charges: </span>
                                 ' . $row["price"] . '  KES
                                </p>';
+                               echo '<p class="mb-4"> <span class="sub-title">Email: </span>
+                               ' . $row["email"] . ' 
+                              </p>';
 
 
 
@@ -652,7 +700,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <?php echo $row['ward']; ?>
                                 </a>
                             </div>
-                            <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
+                            <div class="tab-pane fade" id="details1" role="tabpanel" aria-labelledby="details-tab">
                                 <!-- Product details content goes here -->
                                 <div class="container mt-2">
                                     <div class="row">
@@ -684,9 +732,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Share button -->
+                            <div class="tab-pane fade" id="contacts1" role="tabpanel" aria-labelledby="details-tab">
+                                <!-- Product details content goes here -->
+                                <div class="container mt-2">
+                                    <div class="row">
+                                                 <!-- Share button -->
                         <button class="btn btn-secondary py-3 px-3 mt-3 me-3 action_btn2" id="shareButton"> <i
                                 class="bi bi-telephone"></i> <a href="tel:<?php echo $row['phone']; ?> ">Contact</a>
 
@@ -694,6 +745,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <button class="btn btn-primary py-3 px-3 mt-3 action_btn" id="contactSellerButton"
                                 data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-star"></i> Leave
                                 a review</button>
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+               
                             <br>
 
 

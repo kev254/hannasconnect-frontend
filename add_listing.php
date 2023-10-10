@@ -141,6 +141,7 @@ if (isset($_POST['send'])) {
     $b_social_links = $_POST['b_social_links'];
     $b_message = $_POST['b_message'];
     $b_price_negotiable = $_POST['b_price_negotiable'];
+    $b_price=$_POST['b_price'];
 
 
 
@@ -173,8 +174,8 @@ if (isset($_POST['send'])) {
             VALUES ('$profession','$name', '$lastInsertedUserId', '$slogan', '$county', '$sub_county', '$ward', '$email', '$ibfk', '$i_physical_address', '$i_location_pin', '$i_website', '$i_working_day', '$i_start_time', '$i_end_time', '$i_social_links', '$i_price', '$jsonkeywords ', '$plan', '$i_price_negotiable', '$category', '$fileName')";
 
     } else if ($category === "2") {
-        $individualInsertSql = "INSERT INTO services (name, user_id, slogan, county, sub_counry, ward, email, bkf, branches, location_pin, website, working_days, open_at, clsoing_at, social_links, key_words, plan, price_negotiable, category_id, message, image_url)
-            VALUES ('$name', '$lastInsertedUserId', '$slogan', '$county', '$sub_county', '$ward', '$email', '$bbfk', '$b_ranches', '$i_location_pin', '$b_website', '$b_working_day', '$b_start_time', '$i_end_time', '$b_social_links', '$jsonkeywords ', '$plan', '$b_price_negotiable', '$category', '$b_message', '$fileName')";
+        $individualInsertSql = "INSERT INTO services (name, user_id, slogan, county, sub_counry, ward, email, bkf, branches, location_pin, website, working_days, open_at, clsoing_at, social_links, key_words, plan, price_negotiable, category_id, message, image_url, price)
+            VALUES ('$name', '$lastInsertedUserId', '$slogan', '$county', '$sub_county', '$ward', '$email', '$bbfk', '$b_ranches', '$i_location_pin', '$b_website', '$b_working_day', '$b_start_time','$i_end_time', '$b_social_links', '$jsonkeywords ', '$plan', '$b_price_negotiable', '$category', '$b_message', '$fileName', '$b_price')";
     } else if ($category === "3") {
 
 
@@ -345,14 +346,14 @@ $conn->close();
                                                             class="form-control form-control-user input-btn"
                                                             name="phone" placeholder="Phone number" required
                                                             value="<?php echo $_SESSION['user']['phone']; ?>" readonly
-                                                            required>
+                                                            required id="phone">
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <label for="ward">Profile image (Logo) </label>
 
                                                         <input type="file"
-                                                            class="form-control form-control-user input-btn" name="logo"
-                                                            placeholder="Logo (Profile image)">
+                                                            class="form-control form-control-user input-btn" name="logo" 
+                                                            placeholder="Logo (Profile image)" id="logo">
                                                     </div>
                                                 </div>
 
@@ -376,7 +377,7 @@ $conn->close();
 
                                                     <div class="col-md-12 col-sm-12 mb-3 mb-sm-0">
                                                         <label for="best_known_for">We are best known for. <span
-                                                                id="ibkfcount" style="font-size: 11px;">150</span> words
+                                                                id="ibkfcount" style="font-size: 11px;">50</span> words
                                                             required</label>
                                                         <textarea class="form-control form-control-user input-btn"
                                                             name="ibfk" placeholder="Optional" rows="4"
@@ -504,7 +505,7 @@ $conn->close();
                                                         <label for="office_location">Location</label>
                                                         <input type="text"
                                                             class="form-control form-control-user input-btn"
-                                                            name="i_location_pin" placeholder="Location (pin)">
+                                                            name="i_location_pin" placeholder="Location (pin)" id="i_location_pin">
                                                     </div>
                                                     <div class="col-md-6 col-sm-12 mb-3 mb-sm-0">
                                                         <label for="best_known_for">Website (optional)</label>
@@ -513,7 +514,7 @@ $conn->close();
                                                             name="i_website" placeholder="website">
                                                     </div>
                                                     <div class="col-md-6 col-sm-12 mb-3 mb-sm-0">
-                                                        <label for="social_media">Social media links</label>
+                                                        <label for="social_media">Social media links (Optional)</label>
                                                         <input type="text"
                                                             class="form-control form-control-user input-btn"
                                                             name="i_social_links" placeholder="social">
@@ -556,19 +557,18 @@ $conn->close();
                                                     </div>
 
                                                     <div class="col-md-6 col-sm-12 mb-3 mb-sm-0">
-                                                        <label for="price_type">Indicate the cheapest price of your
-                                                            product or service.</label>
+                                                        <label for="price_type">My cheapest price</label>
                                                         <input type="number"
                                                             class="form-control form-control-user input-btn"
-                                                            name="i_price" placeholder="Price">
+                                                            name="i_price" placeholder="Price" value="0">
                                                     </div>
                                                     <div class="col-md-6 col-sm-12 mb-3 mb-sm-0">
                                                         <label for="price_type">Price is fixed or Negotiable</label>
                                                         <select class="form-control form-control-user input-btn rounded"
                                                             name="i_price_negotiable">
-                                                            <option value=""></option>
-                                                            <option value="N">Fixed</option>
-                                                            <option value="Y">Negotiable</option>
+                                                            <option value="N">My Prices are fixed</option>
+                                                            <option value="Y">My fixed are negotiable
+</option>
                                                         </select>
                                                     </div>
 
@@ -584,14 +584,14 @@ $conn->close();
 
                                                         <input type="text"
                                                             class="form-control form-control-user input-btn" name="key2"
-                                                            placeholder="">
+                                                            placeholder="" id="key2">
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <label for="ward">What id your third keyword term? </label>
 
                                                         <input type="text"
                                                             class="form-control form-control-user input-btn" name="key3"
-                                                            placeholder="">
+                                                            placeholder="" id="key3">
                                                     </div>
 
                                                     <div class="col-sm-3">
@@ -599,7 +599,7 @@ $conn->close();
 
                                                         <input type="text"
                                                             class="form-control form-control-user input-btn" name="key4"
-                                                            placeholder="">
+                                                            placeholder="" id="key4">
                                                     </div>
 
 
@@ -607,7 +607,7 @@ $conn->close();
                                                         <label for="ward">What id your fifth keyword term? </label>
                                                         <input type="text"
                                                             class="form-control form-control-user input-btn" name="key5"
-                                                            id="key5" placeholder="">
+                                                            id="key5" placeholder="" id="key5">
                                                     </div>
 
                                                     <div class="col-sm-3">
@@ -615,7 +615,7 @@ $conn->close();
 
                                                         <input type="text"
                                                             class="form-control form-control-user input-btn" name="key6"
-                                                            placeholder="">
+                                                            placeholder="" id="key6">
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <label for="ward">What id your seventh keyword term? </label>
@@ -623,7 +623,7 @@ $conn->close();
 
                                                         <input type="text"
                                                             class="form-control form-control-user input-btn" name="key7"
-                                                            placeholder="">
+                                                            placeholder="" id="key7">
                                                     </div>
 
                                                     <div class="col-sm-3">
@@ -631,7 +631,7 @@ $conn->close();
 
                                                         <input type="text"
                                                             class="form-control form-control-user input-btn" name="key8"
-                                                            placeholder="">
+                                                            placeholder="" id="key8">
                                                     </div>
 
                                                     <div class="col-sm-3">
@@ -639,14 +639,14 @@ $conn->close();
 
                                                         <input type="text"
                                                             class="form-control form-control-user input-btn" name="key9"
-                                                            placeholder="">
+                                                            placeholder="" id="key9">
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <label for="ward">What id your tenth keyword term? </label>
 
                                                         <input type="text"
                                                             class="form-control form-control-user input-btn"
-                                                            name="key10" placeholder="">
+                                                            name="key10" placeholder="" id="key10">
                                                     </div>
 
                                                     <div class="row mt-4 w-100">
@@ -666,7 +666,7 @@ $conn->close();
                                                 <div class="form-group row" id="businessFields">
                                                     <div class="col-md-12 col-sm-12 mb-3 mb-sm-0">
                                                         <label for="best_known_for">We are best known for. <span
-                                                                id="bbkfcount" style="font-size: 11px;">150</span> words
+                                                                id="bbkfcount" style="font-size: 11px;">50</span> words
                                                             required</label>
                                                         <textarea class="form-control form-control-user input-btn"
                                                             name="bbfk" placeholder="Optional" rows="4"
@@ -677,7 +677,7 @@ $conn->close();
                                                         <label for="best_known_for">Location</label>
                                                         <input type="text"
                                                             class="form-control form-control-user input-btn"
-                                                            name="b_location_pin" placeholder="Location">
+                                                            name="b_location_pin" placeholder="Location" id="b_location_pin">
                                                     </div>
                                                     <div class="col-md-6 col-sm-12 mb-3 mb-sm-0">
                                                         <label for="best_known_for">Website (optional)</label>
@@ -770,15 +770,22 @@ $conn->close();
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="col-md-6 col-sm-12 mb-3 mb-sm-0">
+                                                        <label for="price_type">Our cheapest price</label>
+                                                        <input type="number"
+                                                            class="form-control form-control-user input-btn"
+                                                            name="b_price" placeholder="Price" value="0">
+                                                    </div>
 
 
-                                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                                    <div class="col-sm-6 mb-3 mb-sm-0">
                                                         <label for="price_type">Price is fixed or Negotiable</label>
                                                         <select class="form-control form-control-user input-btn rounded"
                                                             name="b_price_negotiable">
-                                                            <option value=""></option>
-                                                            <option value="N">Fixed</option>
-                                                            <option value="Y">Negotiable</option>
+                                                            
+                                                            <option value="N">Our Prices are fixed</option>
+                                                            <option value="Y">Our fixed are negotiable
+</option>
                                                         </select>
                                                     </div>
 
@@ -787,7 +794,7 @@ $conn->close();
                                                         potential
                                                         customers regarding your business</label>
                                                     <textarea class="form-control form-control-user input-btn"
-                                                        name="b_message"></textarea>
+                                                        name="b_message" id="b_message"></textarea>
 
                                                     <label for="branches_countries">Do you have branches in other
                                                         Countries</label>
@@ -849,14 +856,15 @@ $conn->close();
                                                         <label for="ward">What id your ninetht keyword term? </label>
                                                         <input type="text"
                                                             class="form-control form-control-user input-btn"
-                                                            name="bkey9" id="bkey8" placeholder="">
+                                                            name="bkey9" id="bkey9" placeholder="">
                                                     </div>
                                                     <div class="col-sm-3 mb-3 mb-sm-0">
                                                         <label for="ward">What id your tenth keyword term? </label>
                                                         <input type="text"
                                                             class="form-control form-control-user input-btn"
-                                                            name="bkey10" id="bkey8" placeholder="">
+                                                            name="bkey10" id="bkey10" placeholder="">
                                                     </div>
+                                                    
                                                     <div class="row mt-4 w-100">
                                                         <div class="col-sm-12 d-flex justify-content-end">
                                                             <div class="brown-btn-pill  px-5 waves-effect waves-light me-3"
@@ -877,7 +885,7 @@ $conn->close();
                                                     <div class="col-sm-12 mb-3 mb-sm-0">
                                                         <label for="price_type">Service </label>
                                                         <select class="form-control form-control-user input-btn rounded"
-                                                            name="e_service">
+                                                            name="e_service" id="e_service">
                                                             <option value="">Select service</option>
                                                             <option value="Ambulance">Ambulance</option>
                                                             <option value="Fire brigade">Fire brigade</option>
@@ -887,20 +895,19 @@ $conn->close();
                                                         </select>
                                                     </div>
                                                     <div class="col-sm-12 mb-3 mb-sm-0">
-                                                        <label for="social_media">Indicate the cheapest price of your
-                                                            product or service.</label>
+                                                        <label for="social_media">Our cheapest price</label>
                                                         <input type="number"
                                                             class="form-control form-control-user input-btn"
                                                             name="e_price" placeholder="Optional" value="0">
 
                                                     </div>
                                                     <div class="col-sm-12 mb-3 mb-sm-0">
-                                                        <label for="price_type">Negotiable </label>
+                                                        <label for="price_type">Negotiable or Fixed</label>
                                                         <select class="form-control form-control-user input-btn rounded"
                                                             name="e_price_negotiable">
-                                                            <option value=""></option>
-                                                            <option value="N">Fixed</option>
-                                                            <option value="Y">Negotiable</option>
+                                                            <option value="N">Our Prices are fixed</option>
+                                                            <option value="Y">Our fixed are negotiable
+</option>
                                                         </select>
                                                     </div>
                                                     <div class="row mt-4 w-100">
@@ -920,7 +927,7 @@ $conn->close();
                                                 <div class="form-group row" id="hireMeFields">
                                                     <div class="col-md-12 col-sm-12 mb-3 mb-sm-0">
                                                         <label for="best_known_for">We are best known for. <span
-                                                                id="hbkfcount" style="font-size: 11px;">150</span> words
+                                                                id="hbkfcount" style="font-size: 11px;">50</span> words
                                                             required</label>
                                                         <textarea class="form-control form-control-user input-btn"
                                                             name="hbfk" placeholder="Optional" rows="4"
@@ -1039,25 +1046,25 @@ $conn->close();
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6 col-sm-12 mb-3 mb-sm-0">
-                                                        <label for="best_known_for">Experience (optional)</label>
+                                                        <label for="best_known_for">Experience (required)</label>
                                                         <input type="text"
                                                             class="form-control form-control-user input-btn"
-                                                            name="h_experience" placeholder="Optional">
+                                                            name="h_experience" placeholder="Experience" id="h_experience">
                                                     </div>
 
                                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                                         <label for="best_known_for">Education facility and level
-                                                            (optional)</label>
+                                                            (required)</label>
                                                         <input type="text"
                                                             class="form-control form-control-user input-btn"
-                                                            name="h_facility_level" placeholder="Optional">
+                                                            name="h_facility_level" id="h_facility_level" placeholder="School/College name">
                                                     </div>
 
                                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                                         <label for="best_known_for">What can you do?</label>
                                                         <input type="text"
                                                             class="form-control form-control-user input-btn"
-                                                            name="h_skill" placeholder="Optional">
+                                                            name="h_skill" id="h_skill" placeholder="What are your skills">
                                                     </div>
 
 
@@ -1073,7 +1080,7 @@ $conn->close();
                                                         <label for="best_known_for">Upload resume (CV)</label>
                                                         <input type="file"
                                                             class="form-control form-control-user input-btn"
-                                                            name="cv_file" placeholder="Your cv">
+                                                            name="cv_file" placeholder="Your cv" id="cv_file">
                                                     </div>
                                                     <div class="row mt-4 w-100">
                                                         <div class="col-sm-12 d-flex justify-content-end">
@@ -1184,12 +1191,8 @@ $conn->close();
         var countyCheck = document.querySelector("#county");
         var constituencyCheck = document.querySelector("#sub_county");
         var wardCheck = document.querySelector("#ward");
-
-
-
-
         selectedCategory = categorySelect.value;
-
+        
         businessFields.style.display = 'none';
         emergencyFields.style.display = 'none';
         hireMeFields.style.display = 'none';
@@ -1209,6 +1212,10 @@ $conn->close();
         // on clicking next btn, go to various category
         nextBtn.addEventListener('click', function () {
             selectedCategory = categorySelect.value;
+            if (areFieldsEmpty()) {
+                alert("Fill all mandary fields")
+                return; 
+            } 
 
             formPart1.style.display = "none";
             businessFields.style.display = 'none';
@@ -1261,6 +1268,33 @@ $conn->close();
 
         finalBtn.forEach(item => {
             item.addEventListener('click', function () {
+                if (selectedCategory === '1') {
+                    if (areIndividualFieldsEmpty()) {
+                    alert("Fill all mandary fields")
+                    return; 
+                    }
+                }
+
+                if (selectedCategory === '2') {
+                    if (areBusinessFieldsEmpty()) {
+                    alert("Fill all mandary fields")
+                    return; 
+                    }
+                }
+
+                if (selectedCategory === '3') {
+                    if (areEmergencyFieldsEmpty()) {
+                    alert("Fill all mandary fields")
+                    return; 
+                    }
+                }
+                if (selectedCategory === '4') {
+                    if (areHiremeFieldsEmpty()) {
+                    alert("Fill all mandary fields")
+                    return; 
+                    }
+                }
+
                 businessFields.style.display = 'none';
                 emergencyFields.style.display = 'none';
                 hireMeFields.style.display = 'none';
@@ -1269,6 +1303,237 @@ $conn->close();
                 submissionSection.style.display = 'block';
             })
         })
+
+function areFieldsEmpty() {
+    var isEmpty = false;
+
+    var logoInput = document.querySelector("#logo"); // Replace with the correct ID for your logo input field
+    var emailInput = document.querySelector("#email");
+    var nameInput = document.querySelector("#name");
+    var categorySelect = document.querySelector("#category");
+    var phoneInput = document.querySelector("#phone");
+    var sloganInput = document.querySelector("#slogan");
+
+
+    if (logoInput.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (phoneInput.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (sloganInput.value.trim() === "") {
+        isEmpty = true;
+    }
+
+    if (emailInput.value.trim() === "") {
+        isEmpty = true;
+    }
+
+    if (nameInput.value.trim() === "") {
+        isEmpty = true;
+    }
+
+    if (categorySelect.value === '0') {
+        isEmpty = true;
+    }
+
+
+    return isEmpty;
+}
+
+function areIndividualFieldsEmpty() {
+    var isEmpty = false;
+
+    var ibfk = document.querySelector("#ibkf"); 
+    var i_location_pin = document.querySelector("#i_location_pin"); 
+    var start_time = document.querySelector("#start_time"); 
+    var end_time = document.querySelector("#end_time"); 
+    var key1 = document.querySelector("#key1"); 
+    var key2 = document.querySelector("#key2"); 
+    var key3 = document.querySelector("#key3"); 
+    var key4 = document.querySelector("#key4"); 
+    var key5 = document.querySelector("#key5"); 
+    var key6 = document.querySelector("#key6"); 
+    var key7 = document.querySelector("#key7"); 
+    var key8 = document.querySelector("#key8"); 
+    var key9 = document.querySelector("#key9"); 
+    var key10 = document.querySelector("#key10"); 
+    
+
+    if (ibfk.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (i_location_pin.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (end_time.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (start_time.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (key1.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (key2.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (key3.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (key4.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (key5.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (key6.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (key7.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (key8.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (key9.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (key10.value.trim() === "") {
+        isEmpty = true;
+    }
+
+
+    return isEmpty;
+}
+
+function areBusinessFieldsEmpty() {
+    var isEmpty = false;
+
+    var bbfk = document.querySelector("#bbkf"); 
+    var b_location_pin = document.querySelector("#b_location_pin"); 
+    var b_start_time = document.querySelector("#start_timeb"); 
+    var b_end_time = document.querySelector("#end_timeb"); 
+    var bkey1 = document.querySelector("#bkey1"); 
+    var bkey2 = document.querySelector("#bkey2"); 
+    var bkey3 = document.querySelector("#bkey3"); 
+    var bkey4 = document.querySelector("#bkey4"); 
+    var bkey5 = document.querySelector("#bkey5"); 
+    var bkey6 = document.querySelector("#bkey6"); 
+    var bkey7 = document.querySelector("#bkey7"); 
+    var bkey8 = document.querySelector("#bkey8"); 
+    var bkey9 = document.querySelector("#bkey9"); 
+    var bkey10 = document.querySelector("#bkey10"); 
+    var b_message = document.querySelector("#b_message"); 
+    var b_branches = document.querySelector("#branches_countries"); 
+    
+
+    if (bbfk.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (b_location_pin.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (b_end_time.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (b_start_time.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (bkey1.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (bkey2.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (bkey3.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (bkey4.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (bkey5.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (bkey6.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (bkey7.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (bkey8.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (bkey9.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (bkey10.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (b_message.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (b_branches.value.trim() === "") {
+        isEmpty = true;
+    }
+
+    return isEmpty;
+}
+
+
+
+function areEmergencyFieldsEmpty() {
+    var isEmpty = false;
+
+    var e_service = document.querySelector("#e_service"); 
+    
+
+    if (e_service.value.trim() === "") {
+        isEmpty = true;
+    }
+    
+
+    return isEmpty;
+}
+function areHiremeFieldsEmpty() {
+    var isEmpty = false;
+
+    var hbkf = document.querySelector("#hbkf");
+    var cv_file = document.querySelector("#cv_file"); 
+    var h_experience = document.querySelector("#h_experience"); 
+    var h_facility_level = document.querySelector("#h_facility_level"); 
+    var h_skill = document.querySelector("#h_skill"); 
+
+    
+
+    if (hbkf.value.trim() === "") {
+        isEmpty = true;
+    }
+    
+    if (cv_file.value.trim() === "") {
+        isEmpty = true;
+    }
+    
+    if (h_experience.value.trim() === "") {
+        isEmpty = true;
+    }
+    
+    if (h_facility_level.value.trim() === "") {
+        isEmpty = true;
+    }
+    
+    if (h_skill.value.trim() === "") {
+        isEmpty = true;
+    }
+    
+
+    return isEmpty;
+}
+
+
+
+
+
 
 
     </script>
@@ -1407,21 +1672,21 @@ $conn->close();
         btextArea.addEventListener('input', function () {
             const text = this.value;
             const words = text.trim().split(/\s+/);
-            const wordCount = 150 - words.length;
+            const wordCount = 50 - words.length;
             bwordCountDisplay.textContent = wordCount;
         });
 
         htextArea.addEventListener('input', function () {
             const text = this.value;
             const words = text.trim().split(/\s+/);
-            const wordCount = 150 - words.length;
+            const wordCount = 50 - words.length;
             hwordCountDisplay.textContent = wordCount;
         });
 
         itextArea.addEventListener('input', function () {
             const text = this.value;
             const words = text.trim().split(/\s+/);
-            const wordCount = 150 - words.length;
+            const wordCount = 50 - words.length;
             iwordCountDisplay.textContent = wordCount;
         });
     </script>

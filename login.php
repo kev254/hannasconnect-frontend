@@ -61,11 +61,18 @@
         <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
         <link href="mcss/style.css" rel="stylesheet" type="text/css" />
         <style>
-            .form{
-                /* width: 400px !important; */
+        /* Style for links */
+        a {
+            color: black; /* Replace with your desired color code */
+            text-decoration: none; /* Remove the underline, if desired */
+        }
 
-            }
-            </style>
+        /* Style for visited links (if needed) */
+        a:visited {
+            color: black; /* Replace with your desired visited link color */
+        }
+    </style>
+
 
     </head>
 
@@ -135,7 +142,7 @@
                                     </div>
  <!-- end col -->
                                     <div class="col-lg-5 col-md-6 d-none d-md-block ">
-                                        <img src="img/new/login-img.svg" class="img-fluid" alt="">
+                                        <img src="img/new/bg.png" class="img-fluid" alt="">
                                             <h3 class="mt-3 text-center">
                                                 Welcome back
                                             </h3>
@@ -143,11 +150,12 @@
                                                 Feel free to:
                                             </p>
                                             <ul>
-                                                <li>Create your job listing</li>
-                                                <li>Browse our providers list</li>
-                                                <li>Find the best Talent for your business</li>
-                                                <li>Unlock many more possibilities</li>
-                                            </ul>
+    <li><a href="#contact">Talk to us directly</a></li>
+    <li><a href="index.php#providers">Browse our providers list</a></li>
+    <li><a href="index.php#blog">Read about local and international business news</a></li>
+    <li><a href="http://twitter.com/share?text=Visit the link &url=<?php echo "https://hannasconnect.co.ke"; ?>&hashtags=Hannasconnect,service providers,companies,indivudual service providers,Hire me profiles,Kenya,Nairobi,emergency services">Refer a local business to list with us</a></li>
+</ul>
+
                                     </div>
                                     </div> <!-- end row -->
                                 </div> <!-- end .w-100 -->

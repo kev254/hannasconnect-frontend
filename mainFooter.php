@@ -10,10 +10,10 @@
                 </div>
                 <div class="col-md-4 d-block mb-3 mb-md-0">
                     <h5>Categories</h5>
-                <a href="" class="text-capitalize d-block m-2"> individual service providers</a>
-            <a href="" class="text-capitalize d-block m-2"> companies</a>
-            <a href="" class="text-capitalize d-block m-2">emergency service providers </a>
-            <a href="" class="text-capitalize d-block m-2"> hire me (cv center)</a>
+                <a href="category_listing.php?cat_id=1#providers" class="text-capitalize d-block m-2"> individual service providers</a>
+            <a href="category_listing.php?cat_id=2#providers" class="text-capitalize d-block m-2"> companies</a>
+            <a href="category_listing.php?cat_id=3#providers" class="text-capitalize d-block m-2">emergency service providers </a>
+            <a href="category_listing.php?cat_id=4#providers" class="text-capitalize d-block m-2"> hire me (cv center)</a>
                 </div>
                 <div class="col-md-4  mb-3 mb-md-0">
                     

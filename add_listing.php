@@ -349,7 +349,7 @@ $conn->close();
                                                             required id="phone">
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <label for="ward">Profile image (Logo) </label>
+                                                        <label for="ward">Profile image (Logo) <small> (required)</small></label>
 
                                                         <input type="file"
                                                             class="form-control form-control-user input-btn" name="logo" 
@@ -385,7 +385,7 @@ $conn->close();
                                                     </div>
                                                     <div class="col-md-6 col-sm-12">
                                                         <label for="best_known_for">What is your profession</label>
-                                                        <select class="form-control form-control-user input-btn rounded"
+                                                        <select class="form-control form-control-user input-btn rounded others-input"
                                                             id="profession" name="profession"
                                                             placeholder="Select Profession">
                                                             <option value="Accountant">Accountant</option>
@@ -693,7 +693,7 @@ $conn->close();
                                                     </div>
                                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                                         <label for="biz-category">Business or Company category</label>
-                                                        <select class="form-control form-control-user input-btn rounded"
+                                                        <select class="form-control form-control-user input-btn rounded others-input"
                                                             name="biz-category">
                                                             <option value="">Select business type</option>
                                                             <option value="Accommodation and Hospitality">Accommodation
@@ -730,6 +730,12 @@ $conn->close();
                                                             <option value="Transportation">Transportation</option>
                                                             <option value="Other">Other</option>
                                                         </select>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12 mb-3 mb-sm-0 hide-profession" id="show-other-prof">
+                                                        <label for="other_prof">Enter your profession</label>
+                                                        <input type="text"
+                                                            class="form-control form-control-user input-btn"
+                                                            name="other_profession" placeholder="Profession">
                                                     </div>
 
                                                     <h5 class="mt-4">
@@ -945,7 +951,7 @@ $conn->close();
                                                     </div>
                                                     <div class="col-md-6 col-sm-12">
                                                         <label for="best_known_for">Profession</label>
-                                                        <select class="form-control form-control-user input-btn rounded"
+                                                        <select class="form-control form-control-user input-btn rounded others-input"
                                                             name="h_profession">
                                                             <option value="Accountant">Accountant</option>
                                                             <option value="Auditor">Auditor</option>
@@ -1044,6 +1050,12 @@ $conn->close();
                                                             <option value="Web Developer">Web Developer</option>
                                                             <option value="Other">Other</option>
                                                         </select>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12 mb-3 mb-sm-0 hide-profession" id="show-other-prof">
+                                                        <label for="other_prof">Enter your profession</label>
+                                                        <input type="text"
+                                                            class="form-control form-control-user input-btn"
+                                                            name="other_profession" placeholder="Profession">
                                                     </div>
                                                     <div class="col-md-6 col-sm-12 mb-3 mb-sm-0">
                                                         <label for="best_known_for">Experience (required)</label>
@@ -1186,6 +1198,10 @@ $conn->close();
         var profession = document.getElementById('profession');
         var otherProfession = document.getElementById('show-other-prof');
 
+        var professions = document.querySelectorAll('.others-input');
+        var showOtherProfessions = document.querySelectorAll('.hide-profession')
+        
+
         // get required input fields
         var sloganCheck = document.querySelector("#slogan");
         var countyCheck = document.querySelector("#county");
@@ -1201,19 +1217,37 @@ $conn->close();
         submissionSection.style.display = 'none';
 
 
-        profession.addEventListener('change', function(){
-            if(profession.value=="Other"){
-                otherProfession.style.display = 'block';
-            }
+        professions.forEach(item =>{
+            item.addEventListener('change', function(){
+                if(item.value == "Other"){
+
+                    showOtherProfessions.forEach(work =>{
+                        work.style.display = 'block'
+                    })
+                }
             else{
-                otherProfession.style.display = 'none';
+                showOtherProfessions.forEach(work =>{
+                    work.style.display = 'none'
+                })
             }
+
+            })
         })
+
+
+        // profession.addEventListener('change', function(){
+        //     if(profession.value=="Other"){
+        //         otherProfession.style.display = 'block';
+        //     }
+        //     else{
+        //         otherProfession.style.display = 'none';
+        //     }
+        // })
         // on clicking next btn, go to various category
         nextBtn.addEventListener('click', function () {
             selectedCategory = categorySelect.value;
             if (areFieldsEmpty()) {
-                alert("Fill all mandary fields")
+                alert("Kindly fill all required fields")
                 return; 
             } 
 
@@ -1270,27 +1304,27 @@ $conn->close();
             item.addEventListener('click', function () {
                 if (selectedCategory === '1') {
                     if (areIndividualFieldsEmpty()) {
-                    alert("Fill all mandary fields")
+                    alert("Kindly fill all required fields")
                     return; 
                     }
                 }
 
                 if (selectedCategory === '2') {
                     if (areBusinessFieldsEmpty()) {
-                    alert("Fill all mandary fields")
+                    alert("Kindly fill all required fields")
                     return; 
                     }
                 }
 
                 if (selectedCategory === '3') {
                     if (areEmergencyFieldsEmpty()) {
-                    alert("Fill all mandary fields")
+                    alert("Kindly fill all required fields")
                     return; 
                     }
                 }
                 if (selectedCategory === '4') {
                     if (areHiremeFieldsEmpty()) {
-                    alert("Fill all mandary fields")
+                    alert("Kindly fill all required fields")
                     return; 
                     }
                 }

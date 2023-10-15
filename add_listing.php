@@ -22,7 +22,7 @@ if (isset($_POST['send'])) {
     $i_physical_address = $_POST['i_physical_address'];
     $i_location_pin = $_POST['i_location_pin'];
     $i_website = $_POST['i_website'];
-    $i_working_day = $_POST['i_working_days'];
+    $i_working_day = $conn->real_escape_string($_POST['i_working_days']);
     $i_start_time = $_POST['i_start_time'];
     $i_end_time = $_POST['i_end_time'];
     $i_social_links = $_POST['i_social_links'];
@@ -135,7 +135,7 @@ if (isset($_POST['send'])) {
     $b_branches = $_POST['b_branches'];
     $b_location_pin = $_POST['b_location_pin'];
     $b_website = $_POST['b_website'];
-    $b_working_day = $_POST['b_working_days'];
+    $b_working_day = $conn->real_escape_string($_POST['b_working_days']);
     $b_start_time = $_POST['b_start_time'];
     $b_end_time = $_POST['b_end_time'];
     $b_social_links = $_POST['b_social_links'];
@@ -169,6 +169,7 @@ if (isset($_POST['send'])) {
 
     // Insert data into the 'individual' table using the last inserted user ID
     if ($category === "1") {
+       
 
         $individualInsertSql = "INSERT INTO services (profession,name, user_id, slogan, county, sub_counry, ward, email, bkf, physical_address, location_pin, website, working_days, open_at, clsoing_at, social_links, price, key_words, plan, price_negotiable, category_id, image_url)
             VALUES ('$profession','$name', '$lastInsertedUserId', '$slogan', '$county', '$sub_county', '$ward', '$email', '$ibfk', '$i_physical_address', '$i_location_pin', '$i_website', '$i_working_day', '$i_start_time', '$i_end_time', '$i_social_links', '$i_price', '$jsonkeywords ', '$plan', '$i_price_negotiable', '$category', '$fileName')";

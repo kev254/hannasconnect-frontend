@@ -12,6 +12,7 @@
         <div class="navbar-nav ms-auto p-4 p-lg-0 align-items-center">
         <a href="blog.php" class="nav-item nav-link">Our Blog</a>
             <a href="about.php" class="nav-item nav-link">About Us</a>
+            <a href="find_sponsor.php" class="nav-item nav-link">Find An Investor<img class="" src="img/sponsor.png" width="24" height="24"></a>
             <?php
             if (session_status() == PHP_SESSION_NONE) {
                 session_start();

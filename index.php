@@ -53,13 +53,13 @@ $result = $conn->query($sql);
 
 <head>
     <meta charset="utf-8">
-    <title>Hannasconnect</title>
+    <title>Hanna's connect</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link rel="icon" href="img/new/Logo.png" type="image/x-icon">
+    <link rel="icon" href="img/new/logo.png" type="image/x-icon">
 
 
 
@@ -221,6 +221,13 @@ $result = $conn->query($sql);
 
                         
                         ?>
+              <br>
+              <div class="d-lg-none d-md-block d-sm-block d-xl-none text-center">
+              <span class="m-2 p-2 text-white">Looking to get funding for your business?</span>
+                  <a href="find_sponsor.php" class="brown-btn-filled">Find An Investor<img src="img/giving.png" width="24" height="24"></a>
+
+              </div>
+
            </div>
         </div>
 
@@ -244,6 +251,12 @@ $result = $conn->query($sql);
 
                         
                         ?>
+              <br>
+              <div class="d-lg-none d-md-block d-sm-block d-xl-none text-center">
+                  <span class="m-2 p-2 text-white">Looking to get funding for your business?</span>
+                  <a href="find_sponsor.php" class="brown-btn-filled">Find An Investor <img src="img/giving.png" width="24" height="24"></a>
+
+              </div>
            </div>
         </div>
 
@@ -267,6 +280,12 @@ $result = $conn->query($sql);
 
                         
                         ?>
+              <br>
+              <div class="d-lg-none d-md-block d-sm-block d-xl-none text-center">
+                  <span class="m-2 p-2 text-white">Looking to get funding for your business?</span>
+                  <a href="find_sponsor.php" class="brown-btn-filled">Find An Investor <img src="img/giving.png" width="24" height="24"></a>
+
+              </div>
            </div>
         </div>
 
@@ -285,11 +304,17 @@ $result = $conn->query($sql);
                             echo '<a href="add_listing.php" class="brown-btn-filled">Add Listing <img src="img/new/arrow-in-circle.svg"></a>';
                         }
                         else{
-                            echo'<a href="login.php" class="brown-btn-filled">Get started <img src="img/new/arrow-in-circle.svg"></a>';
+                            echo'<a href="login.php" class="brown-btn-filled">Find An Investor<img src="img/new/arrow-in-circle.svg"></a>';
                         }
 
                         
                         ?>
+              <br>
+              <div class="d-lg-none d-md-block d-sm-block d-xl-none text-center">
+                  <span class="m-2 p-2 text-white">Looking to get funding for your business?</span>
+                  <a href="find_sponsor.php" class="brown-btn-filled">Find An Investor<img src="img/giving.png" width="24" height="24"></a>
+
+              </div>
            </div>
         </div>
       </div>

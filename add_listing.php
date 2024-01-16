@@ -217,7 +217,7 @@ $conn->close();
 
 <head>
     <meta charset="utf-8" />
-    <title>hannasconnect</title>
+    <title>Hanna's Connect</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta content="" name="description" />
     <meta content="MyraStudio" name="author" />
@@ -1131,7 +1131,7 @@ $conn->close();
                                                 </h2>
                                                 <p class="text-center">
                                                     You can now submit your details. Thank you for choosing
-                                                    Hannasconnect
+                                                    Hanna's connect
                                                 </p>
                                                 <div class="form-group text-center">
                                                     <input type="checkbox" class="form-check-input" id="terms"
@@ -1247,6 +1247,9 @@ $conn->close();
         // on clicking next btn, go to various category
         nextBtn.addEventListener('click', function () {
             selectedCategory = categorySelect.value;
+            if (selectedCategory==="1"){
+                $("#ibkfcount").text(30)
+            }
             if (areFieldsEmpty()) {
                 alert("Kindly fill all required fields")
                 return; 
@@ -1398,7 +1401,15 @@ function areIndividualFieldsEmpty() {
     if (ibfk.value.trim() === "") {
         isEmpty = true;
     }
+    if (selectedCategory==="1" && ibfk.value.length>30){
+        alert("Individual accounts are limited to 30 words")
+        isEmpty=true
+    }
     if (i_location_pin.value.trim() === "") {
+        isEmpty = true;
+    }
+    if (!$("#days_selectb").val()) {
+        alert("Please provide the working days")
         isEmpty = true;
     }
     if (end_time.value.trim() === "") {
@@ -1544,7 +1555,7 @@ function areHiremeFieldsEmpty() {
     if (hbkf.value.trim() === "") {
         isEmpty = true;
     }
-    
+
     if (cv_file.value.trim() === "") {
         isEmpty = true;
     }

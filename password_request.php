@@ -6,6 +6,7 @@
     // Execute the query and retrieve the OTP
 
 
+
     // Check if the form is submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Retrieve and sanitize the OTP value
@@ -15,7 +16,11 @@
         $row = mysqli_fetch_assoc($result);
         $name=$row['name'];
         $id=$row['id'];
-        $message="Hello $name follow this link to reset your password https://hannasconnect.co.ke/reset_password.php?id=$id";
+        $link="https://hannasconnect.co.ke/reset_password.php?id=$id";
+        require_once "send_email.php";
+        $sendMail=new send_email();
+        $sendMail->resetPassword($link,$name);
+        $message="https://hannasconnect.co.ke/reset_password.php?id=$id";
 
 
         if ($result->num_rows == 1) {
@@ -37,7 +42,7 @@
 
     function sendEmail($name, $email, $message)
 {
-    $url = 'https://api.emailjs.com/api/v1.0/email/send';
+    /*$url = 'https://api.emailjs.com/api/v1.0/email/send';
     $serviceId = 'service_2xmfgru';
     $templateId = 'template_uqdnf6l';
     $userId = 'pI4L-XL5BNwW1SRD5';
@@ -70,9 +75,9 @@
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
     $response = curl_exec($ch);
-    curl_close($ch);
+    curl_close($ch);*/
 
-    return $response;
+    return "OK";
 }
 ?>
 

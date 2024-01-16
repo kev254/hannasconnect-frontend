@@ -123,7 +123,7 @@ function sendEmail($name, $email, $message) {
 
     <head>
         <meta charset="utf-8" />
-        <title>HanasConnect</title>
+        <title>Hanna's Connect</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta content="" name="description" />
         <meta content="MyraStudio" name="author" />
@@ -148,22 +148,16 @@ function sendEmail($name, $email, $message) {
 
     <body class="signup-body">
  
-            <div>
-                
-                    <div class="container">
+                   <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-12">
                             <div class="d-flex align-items-center min-vh-100">
                                 <div class="w-100 d-block">
                                  <div class="row align-items-center justify-content-around">
-                                 <div class="col-lg-5 col-md-6 d-none d-md-block ">
-                                        <img src="img/new/login-img.svg" class="img-fluid" alt="">
-                                       
-                                       
-                                    </div>  
+
                                     <div class="col-lg-5 col-md-6">
                                         <div class="p-2">
-                                        <div class="row mt-4">
+                                        <div class="row mt-2">
                                                 <div class="col-12 text-center">
                                                     
                                                     <a href="#" class="text-dark mt-3 font-size-22 font-family-secondary">
@@ -216,7 +210,6 @@ function sendEmail($name, $email, $message) {
                 </div>
                 
                 <!-- end container -->
-            </div>
             <!-- end page -->
         
             <!-- jQuery  -->

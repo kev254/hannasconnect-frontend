@@ -47,7 +47,7 @@
 
     <head>
         <meta charset="utf-8" />
-        <title>HanasConnect</title>
+        <title>Hanna's Connect</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta content="" name="description" />
         <meta content="MyraStudio" name="author" />
@@ -141,7 +141,7 @@
                                         </div> <!-- end .padding-5 -->
                                     </div>
  <!-- end col -->
-                                    <div class="col-lg-5 col-md-6 d-none d-md-block ">
+                                    <div class="col-lg-5 col-md-6 d-none">
                                         <img src="img/new/bg.png" class="img-fluid" alt="">
                                             <h3 class="mt-3 text-center">
                                                 Welcome back

@@ -1,5 +1,5 @@
 <?php
-include "includes/dbconnect.php";
+require_once "includes/dbconnect.php";
 session_start();
 $sql = "SELECT users.*, services.* FROM users INNER JOIN services ON users.id = services.user_id limit 8;";
 
@@ -100,29 +100,59 @@ $result = $conn->query($sql);
             <div class="container">
               <div class="row gy-4 mb-5">
 
+                  <?php
+                  function time_elapsed_string($datetime, $full = false) {
+                      $now = new DateTime;
+                      $ago = new DateTime($datetime);
+                      $diff = $now->diff($ago);
+
+                      $diff->w = floor($diff->d / 7);
+                      $diff->d -= $diff->w * 7;
+
+                      $string = array(
+                          'y' => 'year',
+                          'm' => 'month',
+                          'w' => 'week',
+                          'd' => 'day',
+                          'h' => 'hour',
+                          'i' => 'minute',
+                          's' => 'second',
+                      );
+                      foreach ($string as $k => &$v) {
+                          if ($diff->$k) {
+                              $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+                          } else {
+                              unset($string[$k]);
+                          }
+                      }
+
+                      if (!$full) $string = array_slice($string, 0, 1);
+                      return $string ? implode(', ', $string) . ' ago' : 'just now';
+                  }
+
+$query="SELECT * FROM Blog_Posts ORDER BY date_created DESC";
+$stmt=$conn->prepare($query);
+$stmt->bind_result($id,$previewImage,$category,$viewCount,$commentsCount,$title,$shortDescription,$content,$dateCreated,$userId);
+$stmt->execute();
+
+while ($stmt->fetch()){
+?>
+
                 <!-- post -->
-                <div class="col-xl-6"><a class="mb-3" href="#"><img class="img-fluid" src="img/blog-2.jpg" alt="..."/></a>
-                  <div class="d-flex align-items-center justify-content-between mb-2"><small class="text-gray-500">20 May | 2023</small><a class="small fw-bold text-uppercase small" href="#">Business</a></div>
-                  <h3 class="h4"><a class="text-dark" href="post.php">How to build a thriving career</a></h3>
-                  <p class="text-muted text-sm">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                <div class="col-xl-6"><a class="mb-3" href="<?php echo $previewImage;?>"><img class="img-fluid" src="<?php echo $previewImage;?>" alt="<?php echo $previewImage;?>"/></a>
+                  <div class="d-flex align-items-center justify-content-between mb-2"><small class="text-gray-500"><?php echo date('d M Y',strtotime($dateCreated)) ?></small><a class="small fw-bold text-uppercase small" href="#"><?php echo $category;?></a></div>
+                  <h3 class="h4"><a class="text-dark" href="post.php?blog=<?php echo $id?>"><?php echo $title;?></a></h3>
+                  <p class="text-muted text-sm"><?php echo $shortDescription; ?>.</p>
                   <ul class="list-inline list-separated text-gray-500 mb-0">
                     
-                    <li class="list-inline-item small"><i class="far fa-clock"></i> 2 months ago</li>
-                    <li class="list-inline-item small"><i class="far fa-comment"></i> 12</li>
+                    <li class="list-inline-item small"><i class="far fa-clock"></i><?php echo time_elapsed_string($dateCreated);?></li>
+                    <li class="list-inline-item small"><i class="far fa-comment"></i> <?php echo $commentsCount;?></li>
                   </ul>
                 </div>
-                
-                 <!-- post -->
-                 <div class="col-xl-6"><a class="mb-3" href="#"><img class="img-fluid" src="img/blog-3.jpg" alt="..."/></a>
-                  <div class="d-flex align-items-center justify-content-between mb-2"><small class="text-gray-500">20 May | 2023</small><a class="small fw-bold text-uppercase small" href="#">Business</a></div>
-                  <h3 class="h4"><a class="text-dark" href="post.php">How to build a thriving career</a></h3>
-                  <p class="text-muted text-sm">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                  <ul class="list-inline list-separated text-gray-500 mb-0">
-                    
-                    <li class="list-inline-item small"><i class="far fa-clock"></i> 2 months ago</li>
-                    <li class="list-inline-item small"><i class="far fa-comment"></i> 12</li>
-                  </ul>
-                </div>
+                  <?php
+}
+$stmt->close();
+                  ?>
 
               </div>
               <!-- Pagination -->
@@ -154,34 +184,28 @@ $result = $conn->query($sql);
             <div class="card mb-5">
               <div class="card-body">
                 <h3 class="h6 mb-3">Latest Posts</h3><a class="text-reset mb-3" href="post.php">
-                  <div class="d-flex align-items-center"><img class="img-fluid flex-shrink-0" src="img/small-thumbnail-1.jpg" alt="..." width="55">
+
+                      <?php
+                      $query="SELECT Id,preview,title,viewCount,commentsCount FROM Blog_Posts ORDER BY date_created DESC LIMIT 10";
+                      $stmt=$conn->prepare($query);
+                      $stmt->bind_result($pId,$pImage,$pTitle,$vCount,$pComments);
+                      $stmt->execute();
+                      while ($stmt->fetch()){
+                      ?>
+                  <div class="d-flex align-items-center"><img class="img-fluid flex-shrink-0" src="<?php echo $pImage;?>" alt="..." width="55">
                     <div class="ms-3">
-                      <p class="mb-2 fw-bold text-gray-700 lh-1">How to grow your skills</p>
+                      <p class="mb-2 fw-bold text-gray-700 lh-1"><?php echo $pTitle;?></p>
                       <ul class="list-inline list-separated text-gray-500 d-flex align-items-center">
-                        <li class="list-inline-item small"><i class="far fa-eye"></i> 500</li>
-                        <li class="list-inline-item small"><i class="far fa-comment"></i> 12</li>
+                        <li class="list-inline-item small"><i class="far fa-eye"></i> <?php echo $vCount;?></li>
+                        <li class="list-inline-item small"><i class="far fa-comment"></i> <?php echo $pComments;?></li>
                       </ul>
                     </div>
-                  </div></a><a class="text-reset mb-3" href="post.php">
-                  <div class="d-flex align-items-center"><img class="img-fluid flex-shrink-0" src="img/small-thumbnail-2.jpg" alt="..." width="55">
-                    <div class="ms-3">
-                      <p class="mb-2 fw-bold text-gray-700 lh-1">How to grow your skills</p>
-                      <ul class="list-inline list-separated text-gray-500 d-flex align-items-center">
-                        <li class="list-inline-item small"><i class="far fa-eye"></i> 500</li>
-                        <li class="list-inline-item small"><i class="far fa-comment"></i> 12</li>
-                      </ul>
-                    </div>
-                  </div></a><a class="text-reset" href="post.php">
-                  <div class="d-flex align-items-center"><img class="img-fluid flex-shrink-0" src="img/small-thumbnail-3.jpg" alt="..." width="55">
-                    <div class="ms-3">
-                      <p class="mb-2 fw-bold text-gray-700 lh-1">How to grow your skills</p>
-                      <ul class="list-inline list-separated text-gray-500 d-flex align-items-center">
-                        <li class="list-inline-item small"><i class="far fa-eye"></i> 500</li>
-                        <li class="list-inline-item small"><i class="far fa-comment"></i> 12</li>
-                      </ul>
-                    </div>
-                  </div></a>
-              </div>
+                  </div></a><a class="text-reset mb-3" href="post.php?blog=<?php echo $pId;?>">
+                      <?php
+                      }
+                      $stmt->close();
+                      ?>
+                  </div>
             </div>
             
             <!-- Widget [Tags Cloud Widget]-->

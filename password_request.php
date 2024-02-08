@@ -19,7 +19,7 @@
         $link="https://hannasconnect.co.ke/reset_password.php?id=$id";
         require_once "send_email.php";
         $sendMail=new send_email();
-        $sendMail->resetPassword($link,$name);
+        $sendMail->resetPassword($link,$name,$email);
         $message="https://hannasconnect.co.ke/reset_password.php?id=$id";
 
 

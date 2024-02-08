@@ -1,7 +1,10 @@
 <?php
-include "includes/dbconnect.php";
+require_once "includes/dbconnect.php";
 session_start();
 $sql = "SELECT users.*, services.* FROM users INNER JOIN services ON users.id = services.user_id limit 8;";
+$bgid=$_GET["blog"];
+$qwery="UPDATE Blog_Posts SET viewCount=(viewCount+1) WHERE Id=$bgid";
+$conn->query($qwery);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $county=$conn->real_escape_string($_POST['county']);
@@ -92,36 +95,61 @@ $result = $conn->query($sql);
     <section class="py-5">
       <div class="container">
         <div class="row gy-5">
+
+            <?php
+            $postId=$_GET["blog"];
+            $query="SELECT * FROM Blog_Posts  WHERE Id=?";
+            $stmt=$conn->prepare($query);
+            $stmt->bind_param("i",$postId);
+            $stmt->bind_result($id,$previewImage,$category,$viewCount,$commentsCount,$title,$shortDescription,$content,$dateCreated,$userId);
+            $stmt->execute();
+            $stmt->fetch();
+            function time_elapsed_string($datetime, $full = false) {
+                $now = new DateTime;
+                $ago = new DateTime($datetime);
+                $diff = $now->diff($ago);
+
+                $diff->w = floor($diff->d / 7);
+                $diff->d -= $diff->w * 7;
+
+                $string = array(
+                    'y' => 'year',
+                    'm' => 'month',
+                    'w' => 'week',
+                    'd' => 'day',
+                    'h' => 'hour',
+                    'i' => 'minute',
+                    's' => 'second',
+                );
+                foreach ($string as $k => &$v) {
+                    if ($diff->$k) {
+                        $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+                    } else {
+                        unset($string[$k]);
+                    }
+                }
+
+                if (!$full) $string = array_slice($string, 0, 1);
+                return $string ? implode(', ', $string) . ' ago' : 'just now';
+            }
+
+            ?>
           <!-- Latest Posts -->
           <main class="col-lg-8"> 
-            <div class="container"><img class="img-fluid w-100 mb-4" src="img/blog-2.jpg" alt="...">
+            <div class="container"><img class="img-fluid w-100 mb-4" src="<?php echo $previewImage;?>" alt="...">
               <ul class="list-inline mb-3">
-                <li class="list-inline-item"><a class="text-uppercase" href="#">Business</a></li>
-                <li class="list-inline-item"><a class="text-uppercase" href="#">Technology</a></li>
-              </ul>
-              <h1 class="mb-4">How to build a thriving career<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
+                <li class="list-inline-item"><a class="text-uppercase" href="#"><?php echo $category;?></a></li>
+               </ul>
+              <h1 class="mb-4"><?php echo $title;?><a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
               <ul class="list-inline list-separated text-gray-500 mb-5">
                 
-                <li class="list-inline-item small"><i class="far fa-clock"></i> 2 months ago</li>
-                <li class="list-inline-item small"><i class="far fa-comment"></i> 12</li>
+                <li class="list-inline-item small"><i class="far fa-clock"></i> <?php echo time_elapsed_string($dateCreated);?></li>
+                <li class="list-inline-item small"><i class="far fa-comment"></i> <?php echo $commentsCount;?></li>
               </ul>
               <div class="post-body">
-                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                <p class="mb-4"><img class="img-fluid" src="img/featured-pic-3.jpeg" alt="..."></p>
-                <h3>Lorem Ipsum Dolor</h3>
-                <p class="mb-4">div Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda temporibus iusto voluptates deleniti similique rerum ducimus sint ex odio saepe. Sapiente quae pariatur ratione quis perspiciatis deleniti accusantium</p>
-                <div class="border-start border-4 mb-3">
-                  <figure class="border p-4">
-                    <blockquote class="blockquote">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
-                    </blockquote>
-                    <figcaption class="blockquote-footer mb-0">Someone famous in
-                      <cite title="Source Title">Source Title</cite>
-                    </figcaption>
-                  </figure>
-                </div>
-                <p>quasi nam. Libero dicta eum recusandae, commodi, ad, autem at ea iusto numquam veritatis, officiis. Accusantium optio minus, voluptatem? Quia reprehenderit, veniam quibusdam provident, fugit iusto ullam voluptas neque soluta adipisci ad.</p>
+                  <?php echo $content;
+                  $stmt->close();
+                  ?>
               </div>
               <ul class="list-inline mb-5">
                 <li class="list-inline-item"><a class="tag" href="#">#Business</a></li>
@@ -129,65 +157,130 @@ $result = $conn->query($sql);
                 <li class="list-inline-item"><a class="tag" href="#">#Financial</a></li>
                 <li class="list-inline-item"><a class="tag" href="#">#Economy</a></li>
               </ul>
-              <div class="posts-nav d-flex justify-content-between align-items-stretch flex-column flex-md-row mb-5"><a class="prev-post text-start d-flex align-items-center" href="#">
-                  <div class="icon prev"><i class="fas fa-angle-left"></i></div>
+
+              <div class="posts-nav d-flex justify-content-between align-items-stretch flex-column flex-md-row mb-5">
+                  <?php
+                  $pQuery="SELECT id,title FROM Blog_Posts WHERE Id<? ORDER BY Id DESC LIMIT 1";
+                  $stmt=$conn->prepare($pQuery);
+                  $stmt->bind_param("i",$postId);
+                  $stmt->bind_result($preId,$preTitle);
+                  $stmt->execute();
+                  $stmt->store_result();
+                  if ($stmt->num_rows>0){
+                  $stmt->fetch();
+                  ?>
+                  <a class="prev-post text-start d-flex align-items-center" href="https://hannasconnect.co.ke/post.php?blog=<?php echo $preId;?>">
+                      <div class="icon prev"><i class="fas fa-angle-left"></i></div>
                   <div class="text"><strong class="text-primary">Previous Post </strong>
-                    <h6>Looking for a job?</h6>
-                  </div></a><a class="next-post text-end d-flex align-items-center justify-content-end" href="#">
+                    <h6><?php echo $preTitle;?></h6>
+                  </div></a>
+                  <?php
+                  }
+                  $stmt->close();
+                  ?>
+
+                  <?php
+                  $pQuery= "SELECT id,title FROM Blog_Posts WHERE Id>? ORDER BY Id LIMIT 1";
+                  $stmt=$conn->prepare($pQuery);
+                  $stmt->bind_param("i",$postId);
+                  $stmt->bind_result($nId,$nTitle);
+                  $stmt->execute();
+                  $stmt->store_result();
+                  if ($stmt->num_rows>0){
+                  $stmt->fetch();
+                  ?>
+                  <a class="next-post text-end d-flex align-items-center justify-content-end" href="https://hannasconnect.co.ke/post.php?blog=<?php echo $nId;?>">
                   <div class="text"><strong class="text-primary">Next Post </strong>
-                    <h6>Navigating the corporate world</h6>
+                    <h6><?php echo $nTitle;?></h6>
                   </div>
-                  <div class="icon next"><i class="fas fa-angle-right">   </i></div></a></div>
+                  <div class="icon next"><i class="fas fa-angle-right">   </i></div></a>
+                  <?php
+                  }
+                  $stmt->close();
+                  ?>
+              </div>
+
+                <?php
+                function getUserById(int $uid,$conn)
+                {
+                    $sql="Select name from users where id=? order by id limit 1";
+                    $stmt=$conn->prepare($sql);
+                    $stmt->bind_param("i",$uid);
+                    $stmt->bind_result($uName);
+                    $stmt->execute();
+                    $stmt->fetch();
+                    $stmt->close();
+                    return $uName;
+
+                }
+                if (!isset($_SESSION["user"])){
+
+                ?>
+                <div class="mb-5">
+                    <header>
+                        <h3 class="h6 mb-4"><a href="login.php">Login</a> To Submit a comment</h3>
+                    </header>
+                </div>
+                <?php
+                }else{
+                ?>
+
+                <div class="mb-5">
+                    <header>
+                        <h3 class="h6 mb-4">Leave a comment</h3>
+                    </header>
+                    <form action="includes/Comments.php" method="post">
+                        <div class="row gy-3">
+                            <div class="col-md-6">
+                                <div class="border-bottom">
+                                    <input class="form-control px-0 border-0 shadow-0" value="<?php echo $_SESSION['user']['name']?>" type="text" name="username" id="username" placeholder="Name">
+                                </div>
+                                <input type="hidden" value="<?php echo $_SESSION['user']['id']?>" name="userId">
+                                <input type="hidden" value="<?php echo $postId ?>" name="blogId">
+                                <input type="hidden" value="comments" name="mode">
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="border-bottom">
+                                    <textarea class="form-control px-0 border-0 shadow-0" rows="5" name="comments" id="usercomment" placeholder="Type your comment"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button class="btn btn-secondary" type="submit">Submit Comment</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
               <div class="mb-5">
+
                 <header>
-                  <h3 class="h6 mb-4">Post Comments<span class="fw-light text-gray-600 small ms-2">(3)</span></h3>
+                  <h3 class="h6 mb-4">Post Comments<span class="fw-light text-gray-600 small ms-2">(<?php echo $commentsCount;?>)</span></h3>
                 </header>
+                  <?php
+                  $sql="SELECT * FROM Comments";
+                  $stmt=$conn->prepare($sql);
+                  $stmt->bind_result($commId,$cbId,$cUid,$comm,$ccreatedAt);
+                  $stmt->execute();
+                  $stmt->store_result();
+                  while ($stmt->fetch()){
+                  ?>
                 <div class="d-flex align-items-start"><img class="img-fluid rounded-circle flex-shrink-0" src="img/user.svg" alt="Jabi Hernandiz" width="50"/>
-                  <div class="pb-4 ms-3 border-bottom mb-4"><strong>Jabi Hernandiz</strong>
-                    <p class="small text-gray-500">May 2016</p>
-                    <p class="mb-0 text-sm">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                  <div class="pb-4 ms-3 border-bottom mb-4"><strong><?php echo getUserById($cUid,$conn);?></strong>
+                    <p class="small text-gray-500"><?php echo date('M Y',strtotime($ccreatedAt));?></p>
+                    <p class="mb-0 text-sm"><?php echo $comm;?></p>
                   </div>
                 </div>
-                <div class="d-flex align-items-start"><img class="img-fluid rounded-circle flex-shrink-0" src="img/user.svg" alt="Nikolas" width="50"/>
-                  <div class="pb-4 ms-3 border-bottom mb-4"><strong>Nikolas</strong>
-                    <p class="small text-gray-500">May 2016</p>
-                    <p class="mb-0 text-sm">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                  </div>
-                </div>
-                <div class="d-flex align-items-start"><img class="img-fluid rounded-circle flex-shrink-0" src="img/user.svg" alt="John Doe" width="50"/>
-                  <div class="pb-4 ms-3 true"><strong>John Doe</strong>
-                    <p class="small text-gray-500">May 2016</p>
-                    <p class="mb-0 text-sm">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                  </div>
-                </div>
+
+                  <?php
+                  }
+                  ?>
               </div>
-              <div class="mb-5">
-                <header>
-                  <h3 class="h6 mb-4">Leave a reply</h3>
-                </header>
-                <form action="#">
-                  <div class="row gy-3">
-                    <div class="col-md-6">
-                      <div class="border-bottom">
-                        <input class="form-control px-0 border-0 shadow-0" type="text" name="username" id="username" placeholder="Name">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="border-bottom">
-                        <input class="form-control px-0 border-0 shadow-0" type="email" name="username" id="useremail" placeholder="Email Address (will not be published)">
-                      </div>
-                    </div>
-                    <div class="col-md-12">
-                      <div class="border-bottom">
-                        <textarea class="form-control px-0 border-0 shadow-0" rows="5" name="usercomment" id="usercomment" placeholder="Type your comment"></textarea>
-                      </div>
-                    </div>
-                    <div class="col-md-12">
-                      <button class="btn btn-secondary" type="submit">Submit Comment</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
+                <?php
+
+                }
+                ?>
+
             </div>
           </main>
           <aside class="col-lg-4">
@@ -203,41 +296,36 @@ $result = $conn->query($sql);
                 </form>
               </div>
             </div>
-            <!-- Widget [Latest Posts Widget]        -->
-            <div class="card mb-5">
-              <div class="card-body">
-                <h3 class="h6 mb-3">Latest Posts</h3><a class="text-reset mb-3" href="#">
-                  <div class="d-flex align-items-center"><img class="img-fluid flex-shrink-0" src="img/small-thumbnail-1.jpg" alt="..." width="55">
-                    <div class="ms-3">
-                      <p class="mb-2 fw-bold text-gray-700 lh-1">Alberto Savoia Can Teach You About</p>
-                      <ul class="list-inline list-separated text-gray-500 d-flex align-items-center">
-                        <li class="list-inline-item small"><i class="far fa-eye"></i> 500</li>
-                        <li class="list-inline-item small"><i class="far fa-comment"></i> 12</li>
-                      </ul>
-                    </div>
-                  </div></a><a class="text-reset mb-3" href="#">
-                  <div class="d-flex align-items-center"><img class="img-fluid flex-shrink-0" src="img/small-thumbnail-2.jpg" alt="..." width="55">
-                    <div class="ms-3">
-                      <p class="mb-2 fw-bold text-gray-700 lh-1">Alberto Savoia Can Teach You About</p>
-                      <ul class="list-inline list-separated text-gray-500 d-flex align-items-center">
-                        <li class="list-inline-item small"><i class="far fa-eye"></i> 500</li>
-                        <li class="list-inline-item small"><i class="far fa-comment"></i> 12</li>
-                      </ul>
-                    </div>
-                  </div></a><a class="text-reset" href="#">
-                  <div class="d-flex align-items-center"><img class="img-fluid flex-shrink-0" src="img/small-thumbnail-3.jpg" alt="..." width="55">
-                    <div class="ms-3">
-                      <p class="mb-2 fw-bold text-gray-700 lh-1">Alberto Savoia Can Teach You About</p>
-                      <ul class="list-inline list-separated text-gray-500 d-flex align-items-center">
-                        <li class="list-inline-item small"><i class="far fa-eye"></i> 500</li>
-                        <li class="list-inline-item small"><i class="far fa-comment"></i> 12</li>
-                      </ul>
-                    </div>
-                  </div></a>
+
+              <!-- Widget [Latest Posts Widget]        -->
+              <div class="card mb-5">
+                  <div class="card-body">
+                      <h3 class="h6 mb-3">Latest Posts</h3><a class="text-reset mb-3" href="post.php">
+
+                          <?php
+                          $query="SELECT Id,preview,title,viewCount,commentsCount FROM Blog_Posts ORDER BY date_created DESC LIMIT 10";
+                          $stmt=$conn->prepare($query);
+                          $stmt->bind_result($pId,$pImage,$pTitle,$vCount,$pComments);
+                          $stmt->execute();
+                          while ($stmt->fetch()){
+                          ?>
+                          <div class="d-flex align-items-center"><img class="img-fluid flex-shrink-0" src="<?php echo $pImage;?>" alt="..." width="55">
+                              <div class="ms-3">
+                                  <p class="mb-2 fw-bold text-gray-700 lh-1"><?php echo $pTitle;?></p>
+                                  <ul class="list-inline list-separated text-gray-500 d-flex align-items-center">
+                                      <li class="list-inline-item small"><i class="far fa-eye"></i> <?php echo $vCount;?></li>
+                                      <li class="list-inline-item small"><i class="far fa-comment"></i> <?php echo $pComments;?></li>
+                                  </ul>
+                              </div>
+                          </div></a><a class="text-reset mb-3" href="post.php?blog=<?php echo $pId;?>">
+                          <?php
+                          }
+                          $stmt->close();
+                          ?>
+                  </div>
               </div>
-            </div>
-           
-            <!-- Widget [Tags Cloud Widget]-->
+
+              <!-- Widget [Tags Cloud Widget]-->
             <div class="card">
               <div class="card-body">     
                 <h3 class="h6 mb-3">Tags</h3>

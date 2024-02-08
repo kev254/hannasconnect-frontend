@@ -8,13 +8,13 @@ require 'PHPMailer/src/SMTP.php';
 
 class send_email
 {
-    public function resetPassword($link,$name)
+    public function resetPassword($link,$name,$email)
     {
         $mail=new PHPMailer(true);
 
         try {
             $mail->setFrom('hannasconnect@hannasconnect.co.ke', 'Hannas Connect');
-            $mail->addAddress('brianomondi605@gmail.com', 'Brian Omondi');     //Add a recipient
+            $mail->addAddress($email, $name);     //Add a recipient
             $mail->isHTML(true);                                  //Set email format to HTML
             $mail->Subject = 'Password Reset';
             $mail->Body='<div>

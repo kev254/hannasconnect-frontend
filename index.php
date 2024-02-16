@@ -329,44 +329,7 @@ $result = $conn->query($sql);
 
   </section><!-- End Hero -->
 
-        <!--  Start old hero-->
-        <!-- <section id="about hero-section" class="container-xxl py-5">
-            <div class="container">
-                <div class="row g-5 align-items-center flex-wrap-reverse">
-                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                        <h1 class="mb-4">Discover Top Talent and Service Providers</h1>
-                        <p class="mb-4">Say goodbye to intermediaries. Connect directly with potential talents or service providers and discuss at length with them</p>
-                         
 
-
-                    </div>
-                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
-                        <div class="row g-0 about-bg rounded overflow-hidden">
-
-
-                            <div class="col-12 text-end">
-                                <img class="img-fluid"
-                                    src="img/new/hero-img.svg"
-                                    style="width: 85%;">
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-                <div class="row mt-4">
-                    <div class="col-lg-3 col-sm-4 wow fadeIn" data-wow-delay="0.8s">
-                        <a href="#" target="_blank" class="market-btn google-btn" role="button">
-                            <span class="market-button-subtitle">Download on the</span>
-                            <span class="market-button-title">Google Play</span>
-                        </a>
-                    </div>
-                    
-                </div>
-
-            </div>
-        </section> -->
-        <!--  End old hero-->
         <!-- Category Start -->
         <section id="category2 " class="container-xxl py-5">
             <div class="container">
@@ -560,111 +523,69 @@ $result = $conn->query($sql);
         <!-- About End -->
 
            <!-- ======= Frequently Asked Questions Section ======= -->
-    <section id="faq" class="faq">
+    <section id="faq" class="container-xxl py-5">
         <div class="container" data-aos="fade-up">
-            <h2 class="section-title-large text-center">Frequently Asked Questions (FAQs)</h2>
+            <h2 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Recent Blog Posts</h2>
 
+            <div class="row gy-4 mb-5">
 
-            <!-- single faq -->
-            <div class="accordion-list">
-                <ul>
-                    <li data-aos="fade-up">
-                        <i class="fas fa-question-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse"
-                            data-bs-target="#accordion-list-1">
-                            
-                            Do I pay a fee to get contacts on Hanna’s Connect? 
-                            
-                            <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></a>
-                        <div id="accordion-list-1" class="collapse" data-bs-parent=".accordion-list">
-                        No, using my Kenyan Guide or perusing, saving contacts and sending to friends and family is
-absolutely free.
+                <?php
+                function time_elapsed_string($datetime, $full = false) {
+                    $now = new DateTime;
+                    $ago = new DateTime($datetime);
+                    $diff = $now->diff($ago);
 
-                        </div>
-                    </li>
+                    $diff->w = floor($diff->d / 7);
+                    $diff->d -= $diff->w * 7;
 
-               
-                    <li data-aos="fade-up">
-                        <i class="fas fa-question-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse"
-                            data-bs-target="#accordion-list-2">
-                            
-                            Can I list for free on Hanna’s Connect?
-                            
-                            <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></a>
-                        <div id="accordion-list-2" class="collapse" data-bs-parent=".accordion-list">
-                        Yes you can list yourself and your business for absolutely free, however, please note, paying
-accounts are given more priority of visibility than free accounts
+                    $string = array(
+                        'y' => 'year',
+                        'm' => 'month',
+                        'w' => 'week',
+                        'd' => 'day',
+                        'h' => 'hour',
+                        'i' => 'minute',
+                        's' => 'second',
+                    );
+                    foreach ($string as $k => &$v) {
+                        if ($diff->$k) {
+                            $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+                        } else {
+                            unset($string[$k]);
+                        }
+                    }
 
-                        </div>
-                    </li>
+                    if (!$full) $string = array_slice($string, 0, 1);
+                    return $string ? implode(', ', $string) . ' ago' : 'just now';
+                }
 
-               
-                    <li data-aos="fade-up">
-                        <i class="fas fa-question-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse"
-                            data-bs-target="#accordion-list-3">
-                            
-                            What if I don’t want to share my details?
-                            
-                            <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></a>
-                        <div id="accordion-list-3" class="collapse" data-bs-parent=".accordion-list">
-                        The only details we share of you are the details you have shared with us willingly, i.e the details you
-fill on your profile.
+                $query="SELECT * FROM Blog_Posts ORDER BY date_created DESC LIMIT 3";
+                $stmt=$conn->prepare($query);
+                $stmt->bind_result($id,$previewImage,$category,$viewCount,$commentsCount,$title,$shortDescription,$content,$dateCreated,$userId);
+                $stmt->execute();
 
-                        </div>
-                    </li>
+                while ($stmt->fetch()){
+                    ?>
 
-               
-                    <li data-aos="fade-up">
-                        <i class="fas fa-question-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse"
-                            data-bs-target="#accordion-list-4">
-                            
-                            What if I have different branches does that mean different accounts? 
-                            
-                            <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></a>
-                        <div id="accordion-list-4" class="collapse" data-bs-parent=".accordion-list">
-                        No, just tick as many counties as your branch locations
-                        </div>
-                    </li>
+                    <!-- post -->
+                    <div class="col-md-4"><a class="mb-3" href="<?php echo $previewImage;?>"><img class="img-fluid" src="<?php echo $previewImage;?>" alt="<?php echo $previewImage;?>"/></a>
+                        <div class="d-flex align-items-center justify-content-between mb-2"><small class="text-gray-500"><?php echo date('d M Y',strtotime($dateCreated)) ?></small><a class="small fw-bold text-uppercase small" href="#"><?php echo $category;?></a></div>
+                        <h3 class="h4"><a class="text-dark" href="post.php?blog=<?php echo $id?>"><?php echo $title;?></a></h3>
+                        <p class="text-muted text-sm"><?php echo $shortDescription; ?>.</p>
+                        <ul class="list-inline list-separated text-gray-500 mb-0">
 
-                    <li data-aos="fade-up">
-                        <i class="fas fa-question-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse"
-                            data-bs-target="#accordion-list-5">
-                            
-                            Can I list on Hanna’s connect if I am a foreigner? 
-                            
-                            <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></a>
-                        <div id="accordion-list-5" class="collapse" data-bs-parent=".accordion-list">
-                        Yes, you absolutely can
-                        </div>
-                    </li>
+                            <li class="list-inline-item small"><i class="far fa-clock"></i><?php echo time_elapsed_string($dateCreated);?></li>
+                            <li class="list-inline-item small"><i class="far fa-comment"></i> <?php echo $commentsCount;?></li>
+                        </ul>
+                    </div>
+                    <?php
+                }
+                $stmt->close();
+                ?>
 
-                    <li data-aos="fade-up">
-                        <i class="fas fa-question-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse"
-                            data-bs-target="#accordion-list-6">
-                            
-                            Can I list on Hanna’s Connect if am online based? 
-                            
-                            <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></a>
-                        <div id="accordion-list-6" class="collapse" data-bs-parent=".accordion-list">
-                        Yes you absolutely can.
-                        </div>
-                    </li>
-
-                    <li data-aos="fade-up">
-                        <i class="fas fa-question-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse"
-                            data-bs-target="#accordion-list-7">
-                            
-                            Can I list On Hanna’s Connect if my company is registered in a different country? 
-                            
-                            <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></a>
-                        <div id="accordion-list-7" class="collapse" data-bs-parent=".accordion-list">
-                        Yes, if you offer services or offer products in Kenya, you can list.
-                        </div>
-                    </li>
-
-                </ul>
             </div>
-
         </div>
+
     </section><!-- End Frequently Asked Questions Section -->
 
         <!-- Testimonial Start -->

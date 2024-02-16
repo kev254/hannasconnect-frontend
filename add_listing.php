@@ -514,12 +514,6 @@ $conn->close();
                                                             class="form-control form-control-user input-btn"
                                                             name="i_website" placeholder="website">
                                                     </div>
-                                                    <div class="col-md-6 col-sm-12 mb-3 mb-sm-0">
-                                                        <label for="social_media">Social media links (Optional)</label>
-                                                        <input type="text"
-                                                            class="form-control form-control-user input-btn"
-                                                            name="i_social_links" placeholder="social">
-                                                    </div>
 
 
                                                     <div class="col-sm-12 mb-3 mb-sm-0">
@@ -686,12 +680,7 @@ $conn->close();
                                                             class="form-control form-control-user input-btn"
                                                             name="b_website" placeholder="website url">
                                                     </div>
-                                                    <div class="col-md-6 col-sm-12 mb-3 mb-sm-0">
-                                                        <label for="social_media">Social media links</label>
-                                                        <input type="text"
-                                                            class="form-control form-control-user input-btn"
-                                                            name="b_social_media" placeholder="Optional">
-                                                    </div>
+
                                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                                         <label for="biz-category">Business or Company category</label>
                                                         <select class="form-control form-control-user input-btn rounded others-input"

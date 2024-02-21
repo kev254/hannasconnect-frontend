@@ -206,10 +206,11 @@ $result = $conn->query($sql);
 
           <div class="swiper-text">
             <h2>
-            Discover Top Talent and Service Providers
+                Discover Companies and service providers at the County, constituency and Ward level
             </h2>
             <p>
-           Connect directly with people all over the country
+
+                Connect directly with professionals all over the country.
             </p>
             <?php
                         if (isset($_SESSION['user'])) {
@@ -222,7 +223,7 @@ $result = $conn->query($sql);
                         
                         ?>
               <br>
-              <div class="d-lg-none d-md-block d-sm-block d-xl-none text-center">
+              <div class="text-center">
               <span class="m-2 p-2 text-white">Looking to get funding for your business?</span>
                   <a href="find_sponsor.php" class="brown-btn-filled">Find An Investor<img src="img/giving.png" width="24" height="24"></a>
 
@@ -231,99 +232,7 @@ $result = $conn->query($sql);
            </div>
         </div>
 
-        <div class="swiper-slide"><img src="img/new/slider/img-1.png" class="carousel-img" alt="Hannasconnect">
-        <!-- <div class="bg-overlay"></div> -->
-
-          <div class="swiper-text">
-            <h2>
-            Discover Top Talent and Service Providers
-            </h2>
-            <p>
-           Connect directly with people all over the country
-            </p>
-            <?php
-                        if (isset($_SESSION['user'])) {
-                            echo '<a href="add_listing.php" class="brown-btn-filled">Add Listing <img src="img/new/arrow-in-circle.svg"></a>';
-                        }
-                        else{
-                            echo'<a href="login.php" class="brown-btn-filled">Get started <img src="img/new/arrow-in-circle.svg"></a>';
-                        }
-
-                        
-                        ?>
-              <br>
-              <div class="d-lg-none d-md-block d-sm-block d-xl-none text-center">
-                  <span class="m-2 p-2 text-white">Looking to get funding for your business?</span>
-                  <a href="find_sponsor.php" class="brown-btn-filled">Find An Investor <img src="img/giving.png" width="24" height="24"></a>
-
-              </div>
-           </div>
-        </div>
-
-        <div class="swiper-slide"><img src="img/new/slider/img-2.png" class="carousel-img" alt="Hannasconnect">
-        <!-- <div class="bg-overlay"></div> -->
-
-          <div class="swiper-text">
-            <h2>
-            Discover Top Talent and Service Providers
-            </h2>
-            <p>
-           Connect directly with people all over the country
-            </p>
-            <?php
-                        if (isset($_SESSION['user'])) {
-                            echo '<a href="add_listing.php" class="brown-btn-filled">Add Listing <img src="img/new/arrow-in-circle.svg"></a>';
-                        }
-                        else{
-                            echo'<a href="login.php" class="brown-btn-filled">Get started <img src="img/new/arrow-in-circle.svg"></a>';
-                        }
-
-                        
-                        ?>
-              <br>
-              <div class="d-lg-none d-md-block d-sm-block d-xl-none text-center">
-                  <span class="m-2 p-2 text-white">Looking to get funding for your business?</span>
-                  <a href="find_sponsor.php" class="brown-btn-filled">Find An Investor <img src="img/giving.png" width="24" height="24"></a>
-
-              </div>
-           </div>
-        </div>
-
-        <div class="swiper-slide"><img src="img/new/slider/img-3.png" class="carousel-img" alt="Hannasconnect">
-        <!-- <div class="bg-overlay"></div> -->
-
-          <div class="swiper-text">
-            <h2>
-            Discover Top Talent and Service Providers
-            </h2>
-            <p>
-           Connect directly with people all over the country
-            </p>
-            <?php
-                        if (isset($_SESSION['user'])) {
-                            echo '<a href="add_listing.php" class="brown-btn-filled">Add Listing <img src="img/new/arrow-in-circle.svg"></a>';
-                        }
-                        else{
-                            echo'<a href="login.php" class="brown-btn-filled">Find An Investor<img src="img/new/arrow-in-circle.svg"></a>';
-                        }
-
-                        
-                        ?>
-              <br>
-              <div class="d-lg-none d-md-block d-sm-block d-xl-none text-center">
-                  <span class="m-2 p-2 text-white">Looking to get funding for your business?</span>
-                  <a href="find_sponsor.php" class="brown-btn-filled">Find An Investor<img src="img/giving.png" width="24" height="24"></a>
-
-              </div>
-           </div>
-        </div>
-      </div>
-
-      <div class="swiper-pagination"></div>
-
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
-
+         </div>
 
     </div>
 

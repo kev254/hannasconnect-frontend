@@ -159,7 +159,7 @@
 
                             <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></a>
                         <div id="accordion-list-1" class="collapse" data-bs-parent=".accordion-list">
-                            No, using my Kenyan Guide or perusing, saving contacts and sending to friends and family is
+                            No, using Hanna's Connect or perusing, saving contacts and sending to friends and family is
                             absolutely free.
 
                         </div>

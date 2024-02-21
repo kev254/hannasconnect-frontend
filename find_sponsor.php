@@ -22,7 +22,7 @@
         // Check user credentials
         $sql="INSERT INTO Investors(businessName,founders,years,profit,amount,percentage,intention,reason,link,email,phone) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
         $stmt=$conn->prepare($sql);
-        $stmt->bind_param("sissiisssss",$businessName,$totalFounders,$years,$profit,$amount,$percentage,$intention,$reason,$link,$email,$phone);
+        $stmt->bind_param("sisssisssss",$businessName,$totalFounders,$years,$profit,$amount,$percentage,$intention,$reason,$link,$email,$phone);
         $stmt->execute();
 
         if ($stmt->affected_rows>0){
@@ -146,12 +146,12 @@ window.location.href="index.php";
 
                                                 <div class="form-group">
 
-                                                    <textarea required  class="form-control form-control-user" id="intention" placeholder="What do you intent to do with the funding?" name="intention"></textarea>
+                                                    <textarea required rows="5"  class="form-control form-control-user" id="intention" placeholder="What do you intent to do with the funding?" name="intention"></textarea>
 
                                                 </div>
                                                 <div class="form-group">
 
-                                                    <textarea required class="form-control form-control-user" id="reason" placeholder="Why should an investor invest in you?.Keep it short and precise" name="reason"></textarea>
+                                                    <textarea required rows="5" class="form-control form-control-user" id="reason" placeholder="Why should an investor invest in you?.Keep it short and precise" name="reason"></textarea>
 
                                                 </div>
 

@@ -122,12 +122,12 @@ class send_email
     <tr>
         <td>5</td>
         <td>How much do you need for the business?</td>
-        <td>Ksh.'.$amount.'</td>
+        <td>'.$amount.'</td>
     </tr>
     <tr>
         <td>6</td>
         <td>What percentage are you willig to give out?</td>
-        <td>'.$percentage.'%</td>
+        <td>'.$percentage.'</td>
     </tr>
     <tr>
         <td>7</td>

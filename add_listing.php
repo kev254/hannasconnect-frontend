@@ -228,7 +228,8 @@ $conn->close();
 
     <!-- App css -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <li
+            nk href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="mcss/style.css" rel="stylesheet" type="text/css" />
     <link href="mcss/listing.css" rel="stylesheet" type="text/css" />
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
@@ -516,8 +517,8 @@ $conn->close();
                                                     </div>
 
 
-                                                    <div class="col-sm-12 mb-3 mb-sm-0">
-                                                        <label for="working_hours">Working hours</label>
+                                                    <div class="col-sm-12 mb-3 mt-3 mb-sm-0">
+                                                        <label for="working_hours">Working Days</label>
                                                         <div class="time-range">
                                                             <div class="form-group">
                                                                 <label for="days_select">Select Days</label>
@@ -532,7 +533,7 @@ $conn->close();
                                                                     <option value="Sunday">Sunday</option>
                                                                 </select>
                                                             </div>
-                                                            <div class="row mt-3">
+                                                            <div class="row mt-3 d-none">
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
                                                                         <label for="start_time">Start Time</label>
@@ -728,11 +729,8 @@ $conn->close();
                                                             name="other_profession" placeholder="Profession">
                                                     </div>
 
-                                                    <h5 class="mt-4">
-                                                        Define your working hours
-                                                    </h5>
                                                     <div class="col-sm-12 mb-3 mb-sm-0">
-                                                        <label for="working_hours">Working hours</label>
+                                                        <label for="working_hours">Working Days</label>
                                                         <div class="time-range">
                                                             <div class="form-group">
                                                                 <label for="days_select">Select Days</label>
@@ -747,14 +745,14 @@ $conn->close();
                                                                     <option value="Sunday">Sunday</option>
                                                                 </select>
                                                             </div>
-                                                            <div class="row mt-3">
+                                                            <div class="row mt-3 d-none">
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
                                                                         <label for="start_time">Start Time</label>
                                                                         <input type="time" class="form-control"
                                                                             id="start_timeb" name="b_start_time"
                                                                             disabled>
-                                                                    </div>
+                                                               wor     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
@@ -1390,10 +1388,7 @@ function areIndividualFieldsEmpty() {
     if (ibfk.value.trim() === "") {
         isEmpty = true;
     }
-    if (selectedCategory==="1" && ibfk.value.length>30){
-        alert("Individual accounts are limited to 30 words")
-        isEmpty=true
-    }
+
     if (i_location_pin.value.trim() === "") {
         isEmpty = true;
     }
@@ -1401,12 +1396,12 @@ function areIndividualFieldsEmpty() {
         alert("Please provide the working days")
         isEmpty = true;
     }
-    if (end_time.value.trim() === "") {
+    /*if (end_time.value.trim() === "") {
         isEmpty = true;
     }
     if (start_time.value.trim() === "") {
         isEmpty = true;
-    }
+    }*/
     if (key1.value.trim() === "") {
         isEmpty = true;
     }
@@ -1469,12 +1464,12 @@ function areBusinessFieldsEmpty() {
     if (b_location_pin.value.trim() === "") {
         isEmpty = true;
     }
-    if (b_end_time.value.trim() === "") {
+   /* if (b_end_time.value.trim() === "") {
         isEmpty = true;
     }
     if (b_start_time.value.trim() === "") {
         isEmpty = true;
-    }
+    }*/
     if (bkey1.value.trim() === "") {
         isEmpty = true;
     }

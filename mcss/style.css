@@ -25,7 +25,9 @@
     font-family: 'Inter', sans-serif;
     color: var(--bodyText);
 }
-
+body{
+    font-family: "Inter", sans-serif;
+}
 
 h1,h2,h3,h4,h5,h6{
     font-family: 'DM Sans', sans-serif;
@@ -163,6 +165,22 @@ color: var(--primaryHover);
 
     text-align: center;
   }
+  #hero h6 {
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 700;
+    color: var(--white);
+
+    text-align: center;
+}
+#hero h4 {
+    font-size: 38px;
+    font-style: normal;
+    font-weight: 500;
+    color: var(--white);
+
+    text-align: center;
+}
   #hero a{
     margin: auto;
   }
@@ -259,6 +277,9 @@ color: var(--primaryHover);
     #hero h2 {
       font-size: 28px;
     }
+      #hero h4 {
+          font-size: 22px;
+      }
   }
   @media (max-width: 508px) {
     /* #hero {

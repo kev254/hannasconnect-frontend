@@ -62,6 +62,9 @@ $result = $conn->query($sql);
     <link rel="icon" href="img/new/logo.png" type="image/x-icon">
 
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -79,6 +82,7 @@ $result = $conn->query($sql);
     <!-- Template Stylesheet -->
     <link href="mcss/style.css" rel="stylesheet">
     <style>
+
         .user-card {
             border: 1px solid #ccc;
             border-radius: 6px !important;
@@ -179,8 +183,8 @@ $result = $conn->query($sql);
 
 </head>
 
-<body class="body">
-    <div class="container-xxl p-0">
+<body class="body container-fluid">
+    <div class="m-0 p-0">
         <!-- Spinner Start -->
         <!-- <div id="spinner"
             class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -195,23 +199,25 @@ $result = $conn->query($sql);
           <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex justify-cntent-center align-items-center">
     <!-- slider -->
-    <div class="swiper-container swiper hero-swiper">
+    <div class="w-100">
 
       <div class="swiper-wrapper">
 
 
 
-        <div class="swiper-slide"><img src="img/new/slider/img.png" class="carousel-img" alt="Hannasconnect">
+        <img src="img/new/slider/img.png" class="carousel-img img-fluid w-100" alt="Hannasconnect">
         <!-- <div class="bg-overlay"></div> -->
 
           <div class="swiper-text">
-            <h2>
-                Discover Companies and service providers at the County, constituency and Ward level
-            </h2>
+            <h4 class="h6">
+                Discover companies and service providers at the county, constituency and ward level
+            </h4>
             <p>
 
                 Connect directly with professionals all over the country.
             </p>
+              <div class="row d-flex justify-content-evenly mt-4">
+                  <div class="col-md-4 mb-4">
             <?php
                         if (isset($_SESSION['user'])) {
                             echo '<a href="add_listing.php" class="brown-btn-filled">Add Listing <img src="img/new/arrow-in-circle.svg"></a>';
@@ -222,15 +228,12 @@ $result = $conn->query($sql);
 
                         
                         ?>
-              <br>
-              <div class="text-center">
-              <span class="m-2 p-2 text-white">Looking to get funding for your business?</span>
-                  <a href="find_sponsor.php" class="brown-btn-filled">Find An Investor<img src="img/giving.png" width="24" height="24"></a>
-
+                  </div>
+                  <div class="col-md-4">
+              <a href="find_sponsor.php" class="brown-btn-filled">Find An Investor<img src="img/giving.png" width="24" height="24"></a>
               </div>
-
-           </div>
-        </div>
+              </div>
+          </div>
 
          </div>
 
@@ -306,7 +309,7 @@ $result = $conn->query($sql);
                                 <div class="input-group">
                                     <input type="text" class="form-control input-btn" placeholder="Looking for" name="keyword" 
                                         aria-label="keword">
-                                    <div class="input-group-append ms-2">
+                                    <div class="input-group-append ms-2 mt-2">
                                         <button class="brown-btn-filled " type="submit"><i class="mdi mdi-magnify"></i> Search</button>
                                     </div>
                                 </div>

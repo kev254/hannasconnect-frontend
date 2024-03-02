@@ -22,7 +22,7 @@
         // Check user credentials
         $sql="INSERT INTO Investors(businessName,founders,years,profit,amount,percentage,intention,reason,link,email,phone) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
         $stmt=$conn->prepare($sql);
-        $stmt->bind_param("sisssisssss",$businessName,$totalFounders,$years,$profit,$amount,$percentage,$intention,$reason,$link,$email,$phone);
+        $stmt->bind_param("sisssssssss",$businessName,$totalFounders,$years,$profit,$amount,$percentage,$intention,$reason,$link,$email,$phone);
         $stmt->execute();
 
         if ($stmt->affected_rows>0){
@@ -135,12 +135,12 @@ window.location.href="index.php";
                                                 </div>
                                                 <div class="form-group">
 
-                                                    <input type="number" required class="form-control form-control-user input-btn" id="amount" placeholder="How much do you need for the business?" name="amount">
+                                                    <input type="text" required class="form-control form-control-user input-btn" id="amount" placeholder="How much do you need for the business?" name="amount">
 
                                                 </div>
                                                 <div class="form-group">
 
-                                                    <input type="number" required class="form-control form-control-user input-btn" id="percentage" placeholder="What percentage are you willing to give out?" name="percentage">
+                                                    <input type="text" required class="form-control form-control-user input-btn" id="percentage" placeholder="What percentage are you willing to give out?" name="percentage">
 
                                                 </div>
 
